@@ -18,8 +18,8 @@ const getMyStories = (uid) => new Promise((resolve, reject) => {
 const createStory = (storyObj) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/myStories.json`, storyObj)
     .then((response) => {
-      const payload = { firebaseKey: response.data.name };
-      axios.patch(`${dbUrl}/myStories/${response.data.name}.json`, payload)
+      const payload = { firebaseKey: response.data.title };
+      axios.patch(`${dbUrl}/myStories/${response.data.title}.json`, payload)
         .then(resolve);
     }).catch(reject);
 });

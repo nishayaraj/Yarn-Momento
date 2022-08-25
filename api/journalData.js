@@ -18,9 +18,9 @@ const getMyJournals = (uid) => new Promise((resolve, reject) => {
 const createJournal = (journalObj) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/myJournal.json`, journalObj)
     .then((response) => {
-      const payload = { firebaseKey: response.data.name };
+      const payload = { firebaseKey: response.data.journalType };
       // kittunnillallo - check this
-      axios.patch(`${dbUrl}/myJournal/${response.data.name}.json`, payload)
+      axios.patch(`${dbUrl}/myJournal/${response.data.journalType}.json`, payload)
         .then(() => {
           getMyJournals(journalObj.uid).then((data) => resolve(data));
         });

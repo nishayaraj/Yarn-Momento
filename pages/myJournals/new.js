@@ -1,7 +1,7 @@
-// import React from 'react';
+import React from 'react';
 
-// export default function new() {
-//   return (
-//     <div>new</div>
-//   );
-// }
+export default function New() {
+  return (
+    <div>New</div>
+  );
+}
