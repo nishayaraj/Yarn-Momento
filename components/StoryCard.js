@@ -15,9 +15,8 @@ function StoryCard({ storyObj, onUpdate }) {
   return (
     <Card className="text-center">
       {/* check this later */}
-      <Card.Header>{storyObj.journalId.journalType}</Card.Header>
+      <Card.Header>{storyObj.title}</Card.Header>
       <Card.Body>
-        <Card.Title>{storyObj.title}</Card.Title>
         <Card.Text>
           {storyObj.story}
         </Card.Text>

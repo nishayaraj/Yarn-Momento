@@ -19,15 +19,21 @@ export default function ViewStoryCards() {
       <Card className="text-center">
         {/* check this later */}
         <Card.Body>
-          <Card.Title>{storyDetails.title}</Card.Title>
+          <Card.Header>{storyDetails.title}</Card.Header>
           <Card.Text>
             {storyDetails.story}
             <br />
-            Author:  {storyDetails.authorName}
+            Author: {storyDetails.authorName}
           </Card.Text>
         </Card.Body>
-        <Card.Footer className="text-muted">Date Created: {storyDetails.date}</Card.Footer>
+
+        <Card.Footer
+          className="text-muted"
+        >
+          Date Created: {storyDetails.date}
+        </Card.Footer>
       </Card>
+
       <div className="text-dark ms-5 details">
         <h6>
           {storyDetails.public ? ' Public Story' : 'Private Story'}
