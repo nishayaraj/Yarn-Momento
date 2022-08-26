@@ -24,6 +24,9 @@ function StoryCard({ storyObj, onUpdate }) {
         <Link href={`/myStories/${storyObj.firebaseKey}`} passHref>
           <Button variant="primary" className="m-2">VIEW</Button>
         </Link>
+        <Link href={`/players/edit/${storyObj.firebaseKey}`} passHref>
+          <Button variant="info">EDIT</Button>
+        </Link>
         <Button variant="danger" onClick={deleteThisStory} className="m-2">
           DELETE
         </Button>

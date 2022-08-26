@@ -25,9 +25,7 @@ function JournalCard({ journalObj, onUpdate }) {
           {journalObj.journalType}
         </Card.Title>
 
-        <p
-          className="card-text bold"
-        >
+        <p className="card-text bold">
           Created On:{journalObj.date}
         </p>
 

@@ -1,7 +1,6 @@
 import React from 'react';
+import StoryForm from '../../components/forms/StoryForm';
 
-export default function New() {
-  return (
-    <div>New</div>
-  );
+export default function AddStory() {
+  return <StoryForm />;
 }

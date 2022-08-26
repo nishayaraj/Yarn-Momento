@@ -21,7 +21,7 @@ export default function ViewJournal() {
           {journalDetails.journalType}
         </h5>
         <div className="stories-cards-container">
-          {journalDetails.stories?.map((story) => (
+          {journalDetails.myStories?.map((story) => (
             <StoryCard
               key={story.firebaseKey}
               storyObj={story}
