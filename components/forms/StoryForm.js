@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+// import Link from 'next/link';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
+import AddJournalLink from '../AddJournalLink';
 import { useAuth } from '../../utils/context/authContext';
-import { getMyJournals } from '../../api/journalData';
-import { createStory, updateStory } from '../../api/storiesData';
+import { createStory, getMyJournals, updateStory } from '../../api';
 
 const initialState = {
   title: '',
@@ -26,7 +27,6 @@ function StoryForm({ obj }) {
 
   useEffect(() => {
     getMyJournals(user.uid).then(setJournals);
-
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
 
@@ -41,14 +41,24 @@ function StoryForm({ obj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.firebaseKey) {
-      updateStory(formInput).then(() => router.push('/myStories'));
+      updateStory(formInput).then(() => router.push('/my-stories'));
     } else {
       const payload = { ...formInput, uid: user.uid };
       createStory(payload).then(() => {
-        router.push('/myStories');
+        router.push('/my-stories');
       });
     }
   };
+
+  const renderStoryTypeOptions = () => journals.map((journal) => (
+    <option
+      key={journal.firebaseKey}
+      value={journal.firebaseKey}
+      selected={obj.journalId === journal.firebaseKey}
+    >
+      {journal.journalType}
+    </option>
+  ));
 
   return (
     <Form onSubmit={handleSubmit} style={{ color: 'black' }}>
@@ -71,14 +81,13 @@ function StoryForm({ obj }) {
           required
         />
       </FloatingLabel>
-
       <FloatingLabel
         controlId="floatingInput2"
         label="Story"
         className="mb-3"
       >
         <Form.Control
-          type="text"
+          type="textarea"
           placeholder="Weave your Story here"
           name="story"
           value={formInput.story}
@@ -114,20 +123,12 @@ function StoryForm({ obj }) {
           required
         >
           <option value="">Select a Journal Type</option>
-          {journals.map((journal) => {
-            console.log(journal);
-            return (
-              <option
-                key={journal.firebaseKey}
-                value={journal.firebaseKey}
-                selected={obj.journalId === journal.firebaseKey}
-              >
-                {journal.journalType}
-              </option>
-            );
-          })}
+          {renderStoryTypeOptions()}
         </Form.Select>
       </FloatingLabel>
+
+      {/* //change this to a link */}
+      <div style={{ margin: '20px' }}><AddJournalLink /> </div>
 
       <FloatingLabel
         controlId="floatingInput2"
@@ -153,7 +154,7 @@ function StoryForm({ obj }) {
         checked={formInput.public}
         onChange={(e) => setFormInput((prevState) => ({
           ...prevState,
-          favorite: e.target.checked,
+          public: e.target.checked,
         }))}
       />
 
@@ -163,10 +164,10 @@ function StoryForm({ obj }) {
         id="isPublished"
         name="isPublished"
         label="Is Published ?"
-        checked={formInput.public}
+        checked={formInput.isPublished}
         onChange={(e) => setFormInput((prevState) => ({
           ...prevState,
-          favorite: e.target.checked,
+          isPublished: e.target.checked,
         }))}
       />
 

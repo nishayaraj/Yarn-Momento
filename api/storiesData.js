@@ -3,6 +3,20 @@ import { clientCredentials } from '../utils/client';
 
 const dbUrl = clientCredentials.databaseURL;
 
+const getAllPublicStories = () => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/myStories.json?orderBy="public"&equalTo=true`)
+    .then((response) => {
+      if (response?.data && response?.data) {
+        const publicStories = Object.values(response.data);
+        const publicPublishedStories = publicStories.filter((story) => story.isPublished === true);
+        resolve(publicPublishedStories);
+      } else {
+        resolve([]);
+      }
+    })
+    .catch((error) => reject(error));
+});
+
 const getMyStories = (uid) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/myStories.json?orderBy="uid"&equalTo="${uid}"`)
     .then((response) => {
@@ -48,4 +62,5 @@ export {
   deleteStory,
   updateStory,
   getSingleStory,
+  getAllPublicStories,
 };

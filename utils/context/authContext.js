@@ -15,6 +15,7 @@ AuthContext.displayName = 'AuthContext'; // Context object accepts a displayName
 
 const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
+  const [anonymousUser, setAnonymousUser] = useState(null);
 
   // there are 3 states for the user:
   // null = application initial state, not yet loaded
@@ -23,10 +24,15 @@ const AuthProvider = (props) => {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((fbUser) => {
-      if (fbUser) {
+      if (fbUser && !fbUser.isAnonymous) {
         setUser(fbUser);
+        setAnonymousUser(false);
+      } else if (fbUser && fbUser.isAnonymous) {
+        setUser(false);
+        setAnonymousUser(fbUser);
       } else {
         setUser(false);
+        setAnonymousUser(false);
       }
     }); // creates a single global listener for auth state changed
   }, []);
@@ -35,10 +41,11 @@ const AuthProvider = (props) => {
     () => ({
       user,
       userLoading: user === null,
+      anonymousUser,
       // as long as user === null, will be true
       // As soon as the user value !== null, value will be false
     }),
-    [user],
+    [anonymousUser, user],
   );
 
   return <AuthContext.Provider value={value} {...props} />;

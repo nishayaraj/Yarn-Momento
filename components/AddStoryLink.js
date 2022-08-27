@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 function AddStoryLink() {
   const router = useRouter();
 
-  const routeToNewStoryPage = () => router.push('/myStories/new');
+  const routeToNewStoryPage = () => router.push('/my-stories/new');
 
   return (
     <Button

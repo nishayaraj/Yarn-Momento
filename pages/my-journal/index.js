@@ -5,7 +5,7 @@ import Link from 'next/link';
 import AddJournalLink from '../../components/AddJournalLink';
 import { useAuth } from '../../utils/context/authContext';
 import JournalCard from '../../components/JournalCard';
-import { getMyJournals } from '../../api/journalData';
+import { getMyJournals } from '../../api';
 
 function MyJournals() {
   const [journals, setJournals] = useState([]);
@@ -20,26 +20,25 @@ function MyJournals() {
     getAllMyJournals();
   }, [user]);
 
+  const renderJournal = () => journals.map((journal) => (
+    <JournalCard
+      key={journal.firebaseKey}
+      journalObj={journal}
+      onUpdate={getAllMyJournals}
+    />
+  ));
+
   return (
     <div className="text-center my-4">
       <Link
-        href="/myJournal"
+        href="/my-journal"
         passHref
       >
         <h1>My Journals</h1>
       </Link>
 
       <div className="d-flex flex-wrap">
-        {journals.map((journal) => {
-          console.log(journal);
-          return (
-            <JournalCard
-              key={journal.firebaseKey}
-              journalObj={journal}
-              onUpdate={getAllMyJournals}
-            />
-          );
-        })}
+        {renderJournal()}
       </div>
       <div style={{ margin: '20px' }}>
         <AddJournalLink />

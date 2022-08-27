@@ -22,7 +22,7 @@ function StoryCard({ storyObj, onUpdate }) {
         </Card.Text>
 
         <p>By: {storyObj.authorName}</p>
-        <Link href={`/myStories/${storyObj.firebaseKey}`} passHref>
+        <Link href={`/my-stories/${storyObj.firebaseKey}`} passHref>
           <Button
             variant="primary"
             className="m-2"
@@ -31,7 +31,7 @@ function StoryCard({ storyObj, onUpdate }) {
           </Button>
         </Link>
 
-        <Link href={`/myStories/edit/${storyObj.firebaseKey}`} passHref>
+        <Link href={`/my-stories/edit/${storyObj.firebaseKey}`} passHref>
           <Button
             variant="info"
           >

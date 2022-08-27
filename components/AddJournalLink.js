@@ -5,8 +5,7 @@ import { Button } from 'react-bootstrap';
 
 function AddJournalLink() {
   const router = useRouter();
-
-  const routeToNewJournalPage = () => router.push('/myJournal/new');
+  const routeToNewJournalPage = () => router.push('/my-journal/new');
 
   return (
     <Button
