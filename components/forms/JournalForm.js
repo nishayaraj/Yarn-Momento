@@ -5,7 +5,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { createJournal, updateAJournal } from '../../api/journalData';
+import { createJournal, updateAJournal } from '../../api';
 
 const initialState = {
   journalType: '',
@@ -34,11 +34,11 @@ function JournalForm({ obj }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       updateAJournal(formInput)
-        .then(() => router.push(('/myJournal')));
+        .then(() => router.push(('/my-journal')));
     } else {
       const payload = { ...formInput, uid: user.uid };
       createJournal(payload).then(() => {
-        router.push('/myJournal');
+        router.push('/my-journal');
       });
     }
   };

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '../../utils/context/authContext';
 import StoryCard from '../../components/StoryCard';
-import { getMyStories } from '../../api/storiesData';
+import { getMyStories } from '../../api';
 import AddStoryLink from '../../components/AddStoryLink';
 
 function MyStories() {
@@ -21,7 +21,7 @@ function MyStories() {
 
   return (
     <div className="text-center my-4">
-      <Link href="/myStories" passHref>
+      <Link href="/my-stories" passHref>
         <h1>My Stories</h1>
       </Link>
       <div className="d-flex flex-wrap">

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
-import { deleteJournalAndStories } from '../api/mergedData';
+import { deleteJournalAndStories } from '../api';
 
 function JournalCard({ journalObj, onUpdate }) {
   const deleteThisJournal = () => {
@@ -30,7 +30,7 @@ function JournalCard({ journalObj, onUpdate }) {
         </p>
 
         <Link
-          href={`/myJournal/${journalObj.firebaseKey}`}
+          href={`/my-journal/${journalObj.firebaseKey}`}
           passHref
         >
           <Button
@@ -41,7 +41,7 @@ function JournalCard({ journalObj, onUpdate }) {
           </Button>
         </Link>
 
-        <Link href={`/myJournal/edit/${journalObj.firebaseKey}`} passHref>
+        <Link href={`/my-journal/edit/${journalObj.firebaseKey}`} passHref>
           <Button
             variant="info"
           >
