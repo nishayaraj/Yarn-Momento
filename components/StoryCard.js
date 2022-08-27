@@ -20,16 +20,29 @@ function StoryCard({ storyObj, onUpdate }) {
         <Card.Text>
           {storyObj.story}
         </Card.Text>
+
         <p>By: {storyObj.authorName}</p>
         <Link href={`/myStories/${storyObj.firebaseKey}`} passHref>
-          <Button variant="primary" className="m-2">VIEW</Button>
+          <Button
+            variant="primary"
+            className="m-2"
+          >
+            VIEW
+          </Button>
         </Link>
-        <Link href={`/players/edit/${storyObj.firebaseKey}`} passHref>
-          <Button variant="info">EDIT</Button>
+
+        <Link href={`/myStories/edit/${storyObj.firebaseKey}`} passHref>
+          <Button
+            variant="info"
+          >
+            EDIT
+          </Button>
         </Link>
+
         <Button variant="danger" onClick={deleteThisStory} className="m-2">
           DELETE
         </Button>
+
       </Card.Body>
       <Card.Footer className="text-muted">Date Created: {storyObj.date}</Card.Footer>
     </Card>

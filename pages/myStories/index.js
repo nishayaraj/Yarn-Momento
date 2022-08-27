@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useAuth } from '../../utils/context/authContext';
 import StoryCard from '../../components/StoryCard';
 import { getMyStories } from '../../api/storiesData';
+import AddStoryLink from '../../components/AddStoryLink';
 
 function MyStories() {
   const [stories, setStories] = useState([]);
@@ -28,7 +29,7 @@ function MyStories() {
           <StoryCard key={story.firebaseKey} storyObj={story} onUpdate={getAllTheStories} />
         ))}
       </div>
-
+      <div style={{ margin: '20px' }}><AddStoryLink /> </div>
     </div>
   );
 }

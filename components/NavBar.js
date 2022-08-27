@@ -22,7 +22,7 @@ export default function NavBar() {
             {/* <Link passHref href="/players/new">
               <Nav.Link>Add new Story</Nav.Link>
             </Link> */}
-            <Link passHref href="/myJournals">
+            <Link passHref href="/myJournal">
               <Nav.Link>My Journals</Nav.Link>
             </Link>
             {/* <Link passHref href="/myJournals/new">

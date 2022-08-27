@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
@@ -19,12 +20,12 @@ const initialState = {
 
 function StoryForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
-  const [myJournal, setMyJournal] = useState([]);
+  const [journals, setJournals] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
-    getMyJournals(user.uid).then(setMyJournal);
+    getMyJournals(user.uid).then(setJournals);
 
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
@@ -51,7 +52,7 @@ function StoryForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit} style={{ color: 'black' }}>
-      <h2 className="text-white mt-5">
+      <h2 className="text-black mt-5">
         {obj.firebaseKey ? 'Update' : 'Create'}
         Story
       </h2>
@@ -113,11 +114,18 @@ function StoryForm({ obj }) {
           required
         >
           <option value="">Select a Journal Type</option>
-          {myJournal.map((journal) => (
-            <option key={journal.firebaseKey} value={journal.firebaseKey} selected={obj.journalId === myJournal.firebaseKey}>
-              {myJournal.journalType}
-            </option>
-          ))}
+          {journals.map((journal) => {
+            console.log(journal);
+            return (
+              <option
+                key={journal.firebaseKey}
+                value={journal.firebaseKey}
+                selected={obj.journalId === journal.firebaseKey}
+              >
+                {journal.journalType}
+              </option>
+            );
+          })}
         </Form.Select>
       </FloatingLabel>
 

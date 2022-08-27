@@ -13,11 +13,11 @@ function JournalCard({ journalObj, onUpdate }) {
   };
 
   return (
-    <Card className="bg-dark text-white">
+    <Card className="bg-dark text-black">
       <Card.Img
         src={journalObj.imageUrl}
         alt={journalObj.journalType}
-        style={{ height: '400px' }}
+        style={{ height: '400px', width: '300px' }}
       />
 
       <Card.ImgOverlay>
@@ -38,6 +38,14 @@ function JournalCard({ journalObj, onUpdate }) {
             className="m-2"
           >
             VIEW
+          </Button>
+        </Link>
+
+        <Link href={`/myJournal/edit/${journalObj.firebaseKey}`} passHref>
+          <Button
+            variant="info"
+          >
+            EDIT
           </Button>
         </Link>
 

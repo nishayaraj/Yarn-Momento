@@ -14,7 +14,7 @@ const viewStoryDetails = (storyFirebaseKey) => new Promise((resolve, reject) => 
 const viewJournalDetails = (journalFirebaseKey) => new Promise((resolve, reject) => {
   Promise.all([getSingleJournal(journalFirebaseKey), getJournalStories(journalFirebaseKey)])
     .then(([journalObject, journalStoriesArray]) => {
-      resolve({ ...journalObject, stories: journalStoriesArray });
+      resolve({ journal: journalObject, stories: journalStoriesArray });
     }).catch((error) => reject(error));
 });
 
