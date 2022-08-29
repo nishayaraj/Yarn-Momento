@@ -24,12 +24,12 @@ function MyStories() {
       <Link href="/my-stories" passHref>
         <h1>My Stories</h1>
       </Link>
+      <div style={{ margin: '20px' }}><AddStoryLink /> </div>
       <div className="d-flex flex-wrap">
         {stories.map((story) => (
           <StoryCard key={story.firebaseKey} storyObj={story} onUpdate={getAllTheStories} />
         ))}
       </div>
-      <div style={{ margin: '20px' }}><AddStoryLink /> </div>
     </div>
   );
 }

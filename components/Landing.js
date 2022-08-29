@@ -8,6 +8,7 @@ import { getAllPublicStories } from '../api';
 function Landing() {
   const { anonymousUser } = useAuth();
   const [stories, setStories] = useState([]);
+  const [search, setSearch] = useState(undefined);
 
   useEffect(() => {
     anonymouslySignIn();
@@ -20,26 +21,49 @@ function Landing() {
     }
   }, [anonymousUser]);
 
+  // takes care of rendering stories with & without search filter:
   const renderStories = () => ((stories && stories.length > 0)
-    ? stories.map((story) => (
-      <Card
-        key={story.firebaseKey}
-        style={{
-          width: '400px',
-          margin: '15px',
-          padding: '10px',
-          borderRadius: '8px',
-        }}
-      >
-        <Card.Title>{story.title}</Card.Title>
-        <Card.Subtitle>Author: {story.authorName}</Card.Subtitle>
-        <Card.Body>{story.story}</Card.Body>
-      </Card>
-    )) : 'no public story');
+    ? stories.map((story) => {
+      if (search && story.title.toLowerCase().includes(search.toLowerCase())) {
+        return (
+          <Card
+            key={story.firebaseKey}
+            style={{
+              width: '400px',
+              margin: '15px',
+              padding: '10px',
+              borderRadius: '8px',
+            }}
+          >
+            <Card.Title>{story.title}</Card.Title>
+            <Card.Subtitle>Author: {story.authorName}</Card.Subtitle>
+            <Card.Body>{story.story}</Card.Body>
+          </Card>
+        );
+      }
+      if (!search) {
+        return (
+          <Card
+            key={story.firebaseKey}
+            style={{
+              width: '400px',
+              margin: '15px',
+              padding: '10px',
+              borderRadius: '8px',
+            }}
+          >
+            <Card.Title>{story.title}</Card.Title>
+            <Card.Subtitle>Author: {story.authorName}</Card.Subtitle>
+            <Card.Body>{story.story}</Card.Body>
+          </Card>
+        );
+      }
+      return '';
+    }) : 'no public story');
 
   return (
     <div>
-      <LoggedOutNavBar />
+      <LoggedOutNavBar getSearchTerm={setSearch} />
       <div
         style={{
           display: 'flex',

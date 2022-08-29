@@ -89,6 +89,7 @@ function StoryForm({ obj }) {
         <Form.Control
           type="textarea"
           placeholder="Weave your Story here"
+          maxLength={800}
           name="story"
           value={formInput.story}
           onChange={handleChange}

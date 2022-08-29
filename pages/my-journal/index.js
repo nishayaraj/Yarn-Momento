@@ -37,11 +37,12 @@ function MyJournals() {
         <h1>My Journals</h1>
       </Link>
 
-      <div className="d-flex flex-wrap">
-        {renderJournal()}
-      </div>
       <div style={{ margin: '20px' }}>
         <AddJournalLink />
+      </div>
+
+      <div className="d-flex flex-wrap">
+        {renderJournal()}
       </div>
     </div>
   );
