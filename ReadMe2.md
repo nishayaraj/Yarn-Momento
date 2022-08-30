@@ -19,6 +19,7 @@
   - Individuals who values their privacy and want some stories "out of mind, but not out of sight".
   - Writers facing a writers block, who have a thread but want to polish it or think and write on it before     
    publishing.
+  - People who want a diary/journal protected from curious readers. This is better than a lock and key diary.
 
 ## Purpose
 
@@ -28,18 +29,19 @@
 ## Getting Started
 
   Navigate to this link: (https://yarn-momento-b928eb.netlify.app)
-  - Click on the Sign in button to Sign in using google account.
-  - On the loading page, click on 'click to view tributes' button to see players.
-  - On the loading page, click on 'click to view teams' button to see teams.
-  - Navigation via players and teams link on navbar is also possible.
-  - To view individual players, click on view button on player card.
-  - To edit players, click on edit button and change the prepopulated form to your preference. 
-  - To delete a player/tribute, press the delete button, click ok on the pop up to delete, or cancel to not delete.
-  - To view individual teams, click on view button on the team/district card. The team with its existing players will display on the screen.
-  - To edit teamss, click on edit button and change the prepopulated form to your preference. 
-  - To delete a team/district, press the delete button, click ok on the pop up to delete, or cancel to not delete. The team and its players will be deleted.
-  - To search for player, type in the player name fully or partially on the search bar.
-
+  - On the Landing page, you can see the stories by other users set to public and published.
+  - Users can read this stories.
+  - Users can sign in to the app using the sign in button on navbar, autheticate using google authetcation.
+  - The landing page welcomes you to the app.
+  - You can navigate to My Stories page via the link in Navbar and read, edit or delete your stories.
+  - To add a story, you can click on the add story button on My stories page. 
+  - If you are a new user, you can create a new journal by navigating to my journal page via the link in navbar and clicking on Add new journal button.
+  - You can also add a new journal via the add new journal button in the add new story form.
+  - You can set your stories to public and is published using the toggle buttons in the create story form.
+  Only stories that are public and is published will populate the All Stories page and be visible in the unautheticated viewer landing page.
+  - To edit a story or journal, click on edit button and change the prepopulated form to your preference. 
+  - To delete a story/journal, press the delete button, click ok on the pop up to delete, or cancel to not delete. The journal and its stories will be deleted.
+  - To search for a story in the unautheticated landing page, type in the story title fully or partially on the search bar.
 
 ## Design Wireframes and data flow
 
