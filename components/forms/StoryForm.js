@@ -41,11 +41,11 @@ function StoryForm({ obj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.firebaseKey) {
-      updateStory(formInput).then(() => router.push('/my-stories'));
+      updateStory(formInput).then(() => router.back());
     } else {
       const payload = { ...formInput, uid: user.uid };
       createStory(payload).then(() => {
-        router.push('/my-stories');
+        router.back();
       });
     }
   };

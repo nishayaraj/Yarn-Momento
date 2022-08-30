@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import Card from 'react-bootstrap/Card';
+import { Button, Card } from 'react-bootstrap';
+import Link from 'next/link';
+import { useAuth } from '../../utils/context/authContext';
 import { getAllPublicStories } from '../../api';
+import { deleteStory } from '../../api/storiesData';
 
-function Landing() {
+function AllStories() {
+  const { user: { uid } } = useAuth();
   const [stories, setStories] = useState([]);
-  // const [searchStoryTitle, setSearchStoryTitle] = useState('');
+
+  const deleteThisStory = (story) => {
+    if (window.confirm(`Delete ${story.title}?`)) {
+      deleteStory(story.firebaseKey).then(() => getAllPublicStories().then(setStories));
+    }
+  };
 
   useEffect(() => {
     getAllPublicStories()
@@ -12,26 +21,61 @@ function Landing() {
   }, []);
 
   const renderStories = () => ((stories && stories.length > 0)
-    ? stories.map((story) => {
-      if (story.title === 'The Little Thief in the Pantry') {
-        return (
-          <Card
-            key={story.firebaseKey}
-            style={{
-              width: '400px',
-              margin: '15px',
-              padding: '10px',
-              borderRadius: '8px',
-            }}
+    ? stories.map((story) => (
+      <Card
+        key={story.firebaseKey}
+        style={{
+          width: '400px',
+          margin: '15px',
+          padding: '10px',
+          borderRadius: '8px',
+        }}
+      >
+        <Card.Title>{story.title}</Card.Title>
+        <Card.Subtitle>Author: {story.authorName}</Card.Subtitle>
+        <Card.Body>{story.story}</Card.Body>
+        <Card.Footer>
+          <Link
+            href={`/my-stories/${story.firebaseKey}`}
+            passHref
           >
-            <Card.Title>{story.title}</Card.Title>
-            <Card.Subtitle>Author: {story.authorName}</Card.Subtitle>
-            <Card.Body>{story.story}</Card.Body>
-          </Card>
-        );
-      }
-      return '';
-    }) : 'No Public Story');
+            <Button
+              variant="primary"
+              className="m-2"
+            >
+              VIEW
+            </Button>
+          </Link>
+          {
+          uid === story.uid
+          && (
+          <Link
+            href={`/my-stories/edit/${story.firebaseKey}`}
+            passHref
+          >
+            <Button
+              variant="info"
+            >
+              EDIT
+            </Button>
+          </Link>
+          )
+        }
+          {
+          uid === story.uid
+          && (
+          <Button
+            variant="danger"
+            onClick={() => deleteThisStory(story)}
+            className="m-2"
+          >
+            DELETE
+          </Button>
+          )
+          }
+        </Card.Footer>
+      </Card>
+    )) : 'No Public Story');
 
   return (
     <div>
@@ -49,4 +93,4 @@ function Landing() {
   );
 }
 
-export default Landing;
+export default AllStories;
