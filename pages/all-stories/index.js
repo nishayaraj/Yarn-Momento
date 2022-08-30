@@ -79,6 +79,7 @@ function AllStories() {
 
   return (
     <div>
+      <h1>All Stories</h1>
       <div
         style={{
           display: 'flex',
