@@ -11,9 +11,11 @@ function Home() {
         padding: '30px',
         maxWidth: '400px',
         margin: '0 auto',
+        fontFamily: 'cursive',
       }}
     >
       <h1>Hello {user.displayName}! </h1>
+      <h3>Come, Weave your Stories...</h3>
     </div>
   );
 }

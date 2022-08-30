@@ -44,6 +44,19 @@ const deleteStory = (firebaseKey) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+// trial
+const viewPublicStory = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/myStories/${firebaseKey}.json`)
+    .then((response) => {
+      if (response.data) {
+        resolve(Object.values(response.data));
+      } else {
+        resolve();
+      }
+    })
+    .catch((error) => reject(error));
+});
+
 const updateStory = (storyObj) => new Promise((resolve, reject) => {
   axios.patch(`${dbUrl}/myStories/${storyObj.firebaseKey}.json`, storyObj)
     .then(resolve)
@@ -63,4 +76,5 @@ export {
   updateStory,
   getSingleStory,
   getAllPublicStories,
+  viewPublicStory,
 };
