@@ -27,7 +27,11 @@ function MyStories() {
       <div style={{ margin: '20px' }}><AddStoryLink /> </div>
       <div className="d-flex flex-wrap">
         {stories.map((story) => (
-          <StoryCard key={story.firebaseKey} storyObj={story} onUpdate={getAllTheStories} />
+          <StoryCard
+            key={story.firebaseKey}
+            storyObj={story}
+            onUpdate={getAllTheStories}
+          />
         ))}
       </div>
     </div>
