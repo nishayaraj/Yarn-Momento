@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useAuth } from '../../utils/context/authContext';
 import { getAllPublicStories } from '../../api';
 import { deleteStory } from '../../api/storiesData';
+import LikeButton from '../../components/LikeButton';
 
 function AllStories() {
   const { user: { uid } } = useAuth();
@@ -73,7 +74,9 @@ function AllStories() {
             DELETE
           </Button>
           )
+
           }
+          <LikeButton />
         </Card.Footer>
       </Card>
     )) : 'No Public Story');

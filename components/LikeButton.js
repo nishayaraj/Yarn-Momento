@@ -1,25 +1,47 @@
-// import React, { useState } from 'react';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import { useState } from 'react';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
-function LikeButtonCounter() {
-  const [likesCount, setLikesCount] = useState(0);
-  // const [isClicked, setIsClicked] = useState(false);
+export default function LikeButton({ disableLikeOption }) {
+  const [liked, setLiked] = useState(false);
 
-  const handleClick = () => {
-    setLikesCount(likesCount + 1);
+  const updateLikeOption = () => {
+    setLiked(!liked);
   };
 
   return (
     <div>
-      <Button className="like_button" onClick={handleClick}> Like </Button>
-      {likesCount}
-      {/* <span className="likes-counter">{ `Like | ${likes}` }</span> */}
+      {
+        disableLikeOption && (
+        <Button
+          style={{
+            border: 'none',
+            background: 'none',
+            padding: 0,
+            margin: 0,
+          }}
+          onClick={updateLikeOption}
+        >
+          {
+            liked
+              ? <AiFillHeart color="red" fontSize="25px" />
+              : <AiOutlineHeart color="gray" fontSize="25px" />
+          }
+        </Button>
+        )
+      }
+      <div>1000 Likes</div>
     </div>
-  //  className={`like-button ${isClicked && 'liked'}`} onClick={handleClick}>
-  //   <span className="likes-counter">{ `Like | ${likes}` }</span>
-
   );
 }
 
-export default LikeButtonCounter;
+LikeButton.propTypes = {
+  disableLikeOption: PropTypes.bool,
+};
+
+LikeButton.defaultProps = {
+  disableLikeOption: true,
+};
