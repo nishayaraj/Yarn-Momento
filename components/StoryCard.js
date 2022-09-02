@@ -15,8 +15,14 @@ function StoryCard({ storyObj, onUpdate }) {
   return (
     <Card className="text-center">
       {/* check this later */}
-      <Card.Header>{storyObj.title}</Card.Header>
+      <Card.Header className="title-obj">{storyObj.title}</Card.Header>
       <Card.Body>
+        <Card.Img
+          variant="top"
+          src={storyObj.imageUrl}
+          alt={storyObj.title}
+          style={{ height: '200px', width: '500px' }}
+        />
         <Card.Text>
           {storyObj.story}
         </Card.Text>
@@ -56,6 +62,7 @@ StoryCard.propTypes = {
     story: PropTypes.string,
     public: PropTypes.bool,
     date: PropTypes.string,
+    imageUrl: PropTypes.string,
     journalId: PropTypes.string,
     isPublished: PropTypes.bool,
     firebaseKey: PropTypes.string,

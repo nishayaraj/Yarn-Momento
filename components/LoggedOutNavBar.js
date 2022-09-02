@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
@@ -23,6 +24,9 @@ export default function LoggedOutNavBar({ getSearchTerm }) {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
+        <div>
+          <img src="/logo.png" alt="logo" style={{ height: '90px', width: '100px', paddingRight: '10px' }} />
+        </div>
         <Link passHref href="/">
           <Navbar.Brand>Yarn Momento</Navbar.Brand>
         </Link>

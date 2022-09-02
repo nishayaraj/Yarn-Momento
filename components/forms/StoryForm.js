@@ -15,6 +15,7 @@ const initialState = {
   authorName: '',
   story: '',
   date: '',
+  imageUrl: '',
   public: false,
   isPublished: false,
 };
@@ -90,11 +91,13 @@ function StoryForm({ obj }) {
           type="textarea"
           placeholder="Weave your Story here"
           maxLength={800}
+          rows={7}
           name="story"
           value={formInput.story}
           onChange={handleChange}
           required
         />
+        <p>Character Limit: {formInput.story && `${formInput.story.length}/800`}</p>
       </FloatingLabel>
 
       <FloatingLabel
@@ -107,6 +110,21 @@ function StoryForm({ obj }) {
           placeholder="Author Name"
           name="authorName"
           value={formInput.authorName}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
+
+      <FloatingLabel
+        controlId="floatingInput2"
+        label="Story Image"
+        className="mb-3"
+      >
+        <Form.Control
+          type="imageUrl"
+          placeholder="Enter an image url"
+          name="imageUrl"
+          value={formInput.imageUrl}
           onChange={handleChange}
           required
         />
@@ -184,6 +202,7 @@ StoryForm.propTypes = {
     authorName: PropTypes.string,
     journalId: PropTypes.string,
     story: PropTypes.string,
+    imageUrl: PropTypes.string,
     date: PropTypes.string,
     isPublished: PropTypes.bool,
     public: PropTypes.bool,
