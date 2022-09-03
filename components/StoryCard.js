@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
-import LikeButton from './LikeButton';
 import { deleteStory } from '../api/storiesData';
 
 function StoryCard({ storyObj, onUpdate }) {
@@ -37,7 +36,6 @@ function StoryCard({ storyObj, onUpdate }) {
             VIEW
           </Button>
         </Link>
-        <LikeButton />
         <Link href={`/my-stories/edit/${storyObj.firebaseKey}`} passHref>
           <Button
             variant="info"

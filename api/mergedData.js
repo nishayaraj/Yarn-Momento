@@ -1,5 +1,13 @@
 import { getJournalStories, getSingleJournal, deleteSingleJournal } from './journalData';
-import { getSingleStory, deleteStory } from './storiesData';
+import { getSingleStory, deleteStory, updateStory } from './storiesData';
+import { updateUserProfile } from './userProfile';
+
+const updateUserStoryLike = (storyObj, userProfileObj) => new Promise((resolve, reject) => {
+  Promise.all([updateStory(storyObj), updateUserProfile(userProfileObj)])
+    .then(([story, user]) => {
+      resolve({ story, user });
+    }).catch((error) => reject(error));
+});
 
 const viewStoryDetails = (storyFirebaseKey) => new Promise((resolve, reject) => {
   getSingleStory(storyFirebaseKey)
@@ -20,7 +28,6 @@ const viewJournalDetails = (journalFirebaseKey) => new Promise((resolve, reject)
 
 const deleteJournalStories = (journalId) => new Promise((resolve, reject) => {
   getJournalStories(journalId).then((storiesArray) => {
-    console.warn(storiesArray);
     const deleteStoryPromises = storiesArray.map((story) => deleteStory(story.firebaseKey));
 
     Promise.all(deleteStoryPromises).then(() => {
@@ -38,4 +45,5 @@ export {
   viewStoryDetails,
   viewJournalDetails,
   deleteJournalAndStories,
+  updateUserStoryLike,
 };
