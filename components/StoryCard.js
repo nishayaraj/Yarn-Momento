@@ -36,7 +36,6 @@ function StoryCard({ storyObj, onUpdate }) {
             VIEW
           </Button>
         </Link>
-
         <Link href={`/my-stories/edit/${storyObj.firebaseKey}`} passHref>
           <Button
             variant="info"

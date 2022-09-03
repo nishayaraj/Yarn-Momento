@@ -4,6 +4,7 @@ import { useAuth } from '../utils/context/authContext';
 import LoggedOutNavBar from './LoggedOutNavBar';
 import { anonymouslySignIn } from '../utils/auth';
 import { getAllPublicStories } from '../api';
+import LikeComponent from './LikeComponent';
 
 function Landing() {
   const { anonymousUser } = useAuth();
@@ -38,6 +39,7 @@ function Landing() {
             <Card.Title>{story.title}</Card.Title>
             <Card.Subtitle>Author: {story.authorName}</Card.Subtitle>
             <Card.Body>{story.story}</Card.Body>
+            <LikeComponent disableLikeOption counter={story.likes} />
           </Card>
         );
       }
@@ -55,6 +57,7 @@ function Landing() {
             <Card.Title>{story.title}</Card.Title>
             <Card.Subtitle>Author: {story.authorName}</Card.Subtitle>
             <Card.Body>{story.story}</Card.Body>
+            <LikeComponent disableLikeOption counter={story.likes} />
           </Card>
         );
       }

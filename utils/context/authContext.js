@@ -7,6 +7,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { updateUserProfile } from '../../api';
 import { firebase } from '../client';
 
 const AuthContext = createContext();
@@ -27,6 +28,13 @@ const AuthProvider = (props) => {
       if (fbUser && !fbUser.isAnonymous) {
         setUser(fbUser);
         setAnonymousUser(false);
+
+        const { uid, displayName, photoURL } = fbUser;
+        updateUserProfile({
+          firebaseKey: uid,
+          displayName,
+          photoURL,
+        });
       } else if (fbUser && fbUser.isAnonymous) {
         setUser(false);
         setAnonymousUser(fbUser);
