@@ -30,8 +30,9 @@ const createJournal = (journalObj) => new Promise((resolve, reject) => {
   axios
     .post(`${dbUrl}/myJournal.json`, journalObj)
     .then((response) => {
-      updateAJournal({ firebaseKey: response.data.name })
-        .then(resolve);
+      const firebaseKey = response.data.name;
+      updateAJournal({ firebaseKey })
+        .then(resolve(firebaseKey));
     }).catch(reject);
 });
 

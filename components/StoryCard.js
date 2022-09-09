@@ -28,6 +28,7 @@ function StoryCard({ storyObj, onUpdate }) {
         </Card.Text>
 
         <p>By: {storyObj.authorName}</p>
+        {storyObj.journalType && <p>Genre: {storyObj.journalType}</p>}
         <Link href={`/my-stories/${storyObj.firebaseKey}`} passHref>
           <Button
             variant="primary"
@@ -62,6 +63,7 @@ StoryCard.propTypes = {
     public: PropTypes.bool,
     date: PropTypes.string,
     imageUrl: PropTypes.string,
+    journalType: PropTypes.string,
     journalId: PropTypes.string,
     isPublished: PropTypes.bool,
     firebaseKey: PropTypes.string,

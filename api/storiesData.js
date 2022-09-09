@@ -4,7 +4,7 @@ import { clientCredentials } from '../utils/client';
 const dbUrl = clientCredentials.databaseURL;
 
 const getAllPublicStories = () => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/myStories.json?orderBy="public"&equalTo=true`)
+  axios.get(`${dbUrl}/myStories.json?orderBy="isPublic"&equalTo=true`)
     .then((response) => {
       if (response?.data && response?.data) {
         const publicStories = Object.values(response.data);

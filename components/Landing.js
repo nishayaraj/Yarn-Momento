@@ -56,6 +56,7 @@ function Landing() {
           >
             <Card.Title>{story.title}</Card.Title>
             <Card.Subtitle>Author: {story.authorName}</Card.Subtitle>
+            {story.journalType && <Card.Subtitle>Genre: {story.journalType}</Card.Subtitle>}
             <Card.Body>{story.story}</Card.Body>
             <LikeComponent disableLikeOption counter={story.likes} />
           </Card>

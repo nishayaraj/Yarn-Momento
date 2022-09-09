@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-console */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -16,27 +17,50 @@ const initialState = {
   story: '',
   date: '',
   imageUrl: '',
-  public: false,
+  journalId: '',
+  journalType: '',
+  isPublic: false,
   isPublished: false,
 };
 
 function StoryForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
   const [journals, setJournals] = useState([]);
+  const publicToggleRef = useRef(null);
   const router = useRouter();
   const { user } = useAuth();
 
-  useEffect(() => {
-    getMyJournals(user.uid).then(setJournals);
-    if (obj.firebaseKey) setFormInput(obj);
-  }, [obj, user]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormInput((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+
+    if (name === 'journalId') {
+      const { journalType } = journals.find((journal) => journal.firebaseKey === value) || { journalType: undefined };
+      let { isPublic } = formInput;
+      if (journalType && journalType.toLowerCase().includes('personal')) {
+        publicToggleRef.current.disabled = true;
+        isPublic = false;
+      } else {
+        publicToggleRef.current.disabled = false;
+      }
+      setFormInput({
+        ...formInput, [name]: value, journalType, isPublic,
+      });
+    } else {
+      setFormInput({ ...formInput, [name]: value });
+    }
+  };
+
+  const handleToggleChange = (e) => {
+    const { name, checked = false } = e.target;
+    let { journalId, journalType } = formInput;
+    if (name === 'isPublic' && journalType.toLowerCase().includes('personal')) {
+      journalId = '';
+      journalType = '';
+    }
+
+    setFormInput({
+      ...formInput, [name]: checked, journalId, journalType,
+    });
   };
 
   const handleSubmit = (e) => {
@@ -50,6 +74,17 @@ function StoryForm({ obj }) {
       });
     }
   };
+
+  useEffect(() => {
+    getMyJournals(user.uid).then((journalsData) => {
+      setJournals(journalsData);
+      if (obj.firebaseKey) {
+        setFormInput(obj);
+      } else if (obj.journalId) {
+        handleChange({ target: { name: 'journalId', value: obj.journalId } });
+      }
+    });
+  }, [obj, user]);
 
   const renderStoryTypeOptions = () => journals.map((journal) => (
     <option
@@ -146,7 +181,7 @@ function StoryForm({ obj }) {
         </Form.Select>
       </FloatingLabel>
 
-      {/* //change this to a link */}
+      {/* ToDo: change this to a link */}
       <div style={{ margin: '20px' }}><AddJournalLink /> </div>
 
       <FloatingLabel
@@ -167,14 +202,12 @@ function StoryForm({ obj }) {
       <Form.Check
         className="text-white mb-3"
         type="switch"
-        id="public"
-        name="public"
-        label="Public ?"
-        checked={formInput.public}
-        onChange={(e) => setFormInput((prevState) => ({
-          ...prevState,
-          public: e.target.checked,
-        }))}
+        name="isPublic"
+        id="isPublic"
+        label="Is this a public story ?"
+        checked={formInput.isPublic}
+        ref={publicToggleRef}
+        onChange={handleToggleChange}
       />
 
       <Form.Check
@@ -184,10 +217,7 @@ function StoryForm({ obj }) {
         name="isPublished"
         label="Is Published ?"
         checked={formInput.isPublished}
-        onChange={(e) => setFormInput((prevState) => ({
-          ...prevState,
-          isPublished: e.target.checked,
-        }))}
+        onChange={handleToggleChange}
       />
 
       <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Story</Button>
@@ -201,11 +231,12 @@ StoryForm.propTypes = {
     title: PropTypes.string,
     authorName: PropTypes.string,
     journalId: PropTypes.string,
+    journalType: PropTypes.string,
     story: PropTypes.string,
     imageUrl: PropTypes.string,
     date: PropTypes.string,
     isPublished: PropTypes.bool,
-    public: PropTypes.bool,
+    isPublic: PropTypes.bool,
   }),
 };
 
