@@ -5,9 +5,17 @@ import Link from 'next/link';
 import {
   Navbar, Container, Nav, Button,
 } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 import { signOut } from '../utils/auth';
 
 export default function NavBar() {
+  const router = useRouter();
+
+  const handleSignoutClick = () => {
+    signOut();
+    router.replace('/');
+  };
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -31,7 +39,7 @@ export default function NavBar() {
             <Link passHref href="/all-stories">
               <Nav.Link>All Stories</Nav.Link>
             </Link>
-            <Button variant="danger" onClick={signOut}>Sign Out</Button>
+            <Button variant="danger" onClick={handleSignoutClick}>Sign Out</Button>
           </Nav>
         </Navbar.Collapse>
       </Container>

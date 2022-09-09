@@ -34,12 +34,10 @@ function JournalForm({ obj }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       updateAJournal(formInput)
-        .then(() => router.push(('/my-journal')));
+        .then(() => router.push('/my-journal'));
     } else {
       const payload = { ...formInput, uid: user.uid };
-      createJournal(payload).then(() => {
-        router.push('/my-journal');
-      });
+      createJournal(payload).then((journalFirebaseKey) => router.push(`/my-journal/${journalFirebaseKey}`));
     }
   };
 
@@ -59,6 +57,7 @@ function JournalForm({ obj }) {
           onChange={handleChange}
           required
         />
+        Journal & stories from journal named &quot;personal&quot; will be private to the user
       </FloatingLabel>
 
       <FloatingLabel

@@ -13,7 +13,10 @@ function JournalCard({ journalObj, onUpdate }) {
   };
 
   return (
-    <Card className="bg-dark text-black">
+    <Card
+      className="bg-dark text-black"
+      key={journalObj.firebaseKey}
+    >
       <Card.Img
         src={journalObj.imageUrl}
         alt={journalObj.journalType}

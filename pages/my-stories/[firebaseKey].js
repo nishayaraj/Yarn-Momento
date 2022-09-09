@@ -24,6 +24,8 @@ export default function ViewStoryCards() {
             {storyDetails.story}
             <br />
             Author: {storyDetails.authorName}
+            <br />
+            {storyDetails.journalType && `Genre: ${storyDetails.journalType}`}
           </Card.Text>
         </Card.Body>
 
@@ -36,7 +38,7 @@ export default function ViewStoryCards() {
 
       <div className="text-dark ms-5 details">
         <h6>
-          {storyDetails.public ? ' Public Story' : 'Private Story'}
+          {storyDetails.isPublic ? ' Public Story' : 'Private Story'}
           <br />
           Published Status: {storyDetails.isPublished ? ' Published' : 'In Progress'}
         </h6>
