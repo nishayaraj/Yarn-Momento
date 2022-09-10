@@ -17,25 +17,35 @@ export default function NavBar() {
   };
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      bg="light"
+      variant="light"
+      fixed="top"
+      style={{ boxShadow: '0 2px 4px -1px rgb(57 76 96 / 15%)' }}
+    >
       <Container>
-        <div>
-          <img src="/logo.png" alt="logo" style={{ height: '90px', width: '100px', paddingRight: '10px' }} />
-        </div>
+        <img src="/logo.png" alt="logo" style={{ height: '50px', paddingRight: '10px' }} />
         <Link passHref href="/">
-          <Navbar.Brand>Yarn Momento</Navbar.Brand>
+          <Navbar.Brand>
+            Yarn Momento
+          </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
+        <Navbar.Collapse
+          style={{ justifyContent: 'right' }}
+        >
+          <Nav>
+            <Link
+              passHref
+              href="/my-journal"
+            >
+              <Nav.Link>My Journals</Nav.Link>
+            </Link>
             <Link passHref href="/my-stories">
               <Nav.Link>My Stories</Nav.Link>
             </Link>
-            <Link passHref href="/my-journal">
-              <Nav.Link>My Journals</Nav.Link>
-            </Link>
-            {/*
-            Change the nav path of all stories */}
             <Link passHref href="/all-stories">
               <Nav.Link>All Stories</Nav.Link>
             </Link>

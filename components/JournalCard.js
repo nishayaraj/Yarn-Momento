@@ -16,50 +16,52 @@ function JournalCard({ journalObj, onUpdate }) {
     <Card
       className="bg-dark text-black"
       key={journalObj.firebaseKey}
+      style={{ borderColor: 'lightgray' }}
     >
       <Card.Img
         src={journalObj.imageUrl}
         alt={journalObj.journalType}
-        style={{ height: '400px', width: '300px' }}
+        style={{ height: '300px', width: '300px', objectFit: 'cover' }}
       />
 
-      <Card.ImgOverlay>
+      <Card.ImgOverlay
+        style={{ display: 'flex', flexDirection: 'column' }}
+      >
         <Card.Title>
           {journalObj.journalType}
         </Card.Title>
-
-        <p className="card-text bold">
+        <Card.Body>
           Created On:{journalObj.date}
-        </p>
+        </Card.Body>
+        <Card.Footer fixed="bottom">
+          <Link
+            href={`/my-journal/${journalObj.firebaseKey}`}
+            passHref
+          >
+            <Button
+              variant="primary"
+              className="m-2"
+            >
+              VIEW
+            </Button>
+          </Link>
 
-        <Link
-          href={`/my-journal/${journalObj.firebaseKey}`}
-          passHref
-        >
+          <Link href={`/my-journal/edit/${journalObj.firebaseKey}`} passHref>
+            <Button
+              variant="info"
+            >
+              EDIT
+            </Button>
+          </Link>
+
           <Button
-            variant="primary"
+            variant="danger"
+            onClick={deleteThisJournal}
             className="m-2"
           >
-            VIEW
+            DELETE
           </Button>
-        </Link>
-
-        <Link href={`/my-journal/edit/${journalObj.firebaseKey}`} passHref>
-          <Button
-            variant="info"
-          >
-            EDIT
-          </Button>
-        </Link>
-
-        <Button
-          variant="danger"
-          onClick={deleteThisJournal}
-          className="m-2"
-        >
-          DELETE
-        </Button>
-
+        </Card.Footer>
       </Card.ImgOverlay>
     </Card>
   );

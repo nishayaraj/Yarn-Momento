@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useRouter } from 'next/router';
@@ -10,10 +11,16 @@ function AddStoryLink() {
 
   return (
     <Button
-      variant="primary"
+      variant="light"
       onClick={routeToNewStoryPage}
+      style={{ background: 'white', height: '45px' }}
     >
-      Add new story
+      <img
+        src="./plus.png"
+        alt="Add new Story"
+        style={{ height: '24px', marginRight: '6px' }}
+      />
+      New story
     </Button>
   );
 }
