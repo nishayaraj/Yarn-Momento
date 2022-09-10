@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { useAuth } from '../../utils/context/authContext';
+import PageTitle from '../../components/PageTitle';
 import StoryCard from '../../components/StoryCard';
 import { getMyStories } from '../../api';
 import AddStoryLink from '../../components/AddStoryLink';
@@ -21,10 +21,9 @@ function MyStories() {
 
   return (
     <div className="text-center my-4">
-      <Link href="/my-stories" passHref>
-        <h1>My Stories</h1>
-      </Link>
-      <div style={{ margin: '20px' }}><AddStoryLink /> </div>
+      <PageTitle title="My Stories" path="/my-stories">
+        <AddStoryLink />
+      </PageTitle>
       <div className="d-flex flex-wrap">
         {stories.map((story) => (
           <StoryCard

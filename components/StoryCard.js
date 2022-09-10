@@ -21,6 +21,7 @@ function StoryCard({ storyObj, onUpdate }) {
           variant="top"
           src={storyObj.imageUrl}
           alt={storyObj.title}
+          className="storyCardImage"
           style={{ height: '200px', width: '500px' }}
         />
         <Card.Text>

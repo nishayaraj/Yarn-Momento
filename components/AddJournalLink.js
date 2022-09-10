@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useRouter } from 'next/router';
@@ -9,10 +10,16 @@ function AddJournalLink() {
 
   return (
     <Button
-      variant="primary"
+      variant="light"
       onClick={routeToNewJournalPage}
+      style={{ background: 'white', height: '45px' }}
     >
-      Add new Journal
+      <img
+        src="./plus.png"
+        alt="Add new journal"
+        style={{ height: '24px', marginRight: '6px' }}
+      />
+      New journal
     </Button>
   );
 }
