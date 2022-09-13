@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../utils/context/authContext';
 import PageTitle from '../../components/PageTitle';
-import StoryCard from '../../components/StoryCard';
+import MyStoryCard from '../../components/MyStoryCard';
 import { getMyStories } from '../../api';
 import AddStoryLink from '../../components/AddStoryLink';
 
@@ -21,12 +21,12 @@ function MyStories() {
 
   return (
     <div className="text-center my-4">
-      <PageTitle title="My Stories" path="/my-stories">
+      <PageTitle title="My Stories">
         <AddStoryLink />
       </PageTitle>
       <div className="d-flex flex-wrap">
         {stories.map((story) => (
-          <StoryCard
+          <MyStoryCard
             key={story.firebaseKey}
             storyObj={story}
             onUpdate={getAllTheStories}

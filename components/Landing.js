@@ -25,7 +25,7 @@ function Landing() {
   // takes care of rendering stories with & without search filter:
   const renderStories = () => ((stories && stories.length > 0)
     ? stories.map((story) => {
-      if (search && story.title.toLowerCase().includes(search.toLowerCase())) {
+      if (search && story.title.toLowerCase().toLowerCase().includes(search.toLowerCase())) {
         return (
           <Card
             key={story.firebaseKey}

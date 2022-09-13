@@ -34,7 +34,9 @@ export default function LikeComponent({
       style={{
         display: 'flex',
         alignItems: 'center',
+        cursor: 'pointer',
       }}
+      onClick={() => updateLikeOption(!liked)}
     >
       {
         !disableLikeOption && (
@@ -45,7 +47,6 @@ export default function LikeComponent({
             padding: 0,
             margin: 0,
           }}
-          onClick={() => updateLikeOption(!liked)}
         >
           {
             liked

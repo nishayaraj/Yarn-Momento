@@ -1,33 +1,37 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { deleteJournalAndStories } from '../api';
+import { deleteStory } from '../api/storiesData';
 
-function JournalCard({ journalObj, onUpdate }) {
+function MyStoryCard({ storyObj, onUpdate }) {
   const router = useRouter();
 
-  const deleteThisJournal = () => {
-    if (window.confirm(`Delete ${journalObj.journalType}?`)) {
-      deleteJournalAndStories(journalObj.firebaseKey).then(() => onUpdate());
+  const deleteThisStory = () => {
+    if (window.confirm(`Delete ${storyObj.title}?`)) {
+      deleteStory(storyObj.firebaseKey).then(() => onUpdate());
     }
   };
 
-  const editJournal = () => router.push(`/my-journal/edit/${journalObj.firebaseKey}`);
+  const editStory = () => router.push(`/my-stories/edit/${storyObj.firebaseKey}`);
 
-  const viewJournal = () => router.push(`/my-journal/${journalObj.firebaseKey}`);
+  const viewStory = () => router.push(`/my-stories/${storyObj.firebaseKey}`);
+
+  const shortStory = storyObj.story.substring(0, 150);
 
   return (
     <div
-      style={{ margin: '0px 16px 16px' }}
+      style={{
+        margin: '0px 16px 16px',
+        width: '300px',
+      }}
     >
       <div>
         <img
-          src={journalObj.imageUrl}
-          alt={journalObj.journalType}
+          src={storyObj.imageUrl}
+          alt={storyObj.title}
           style={{
             height: '300px',
             width: '300px',
@@ -40,21 +44,28 @@ function JournalCard({ journalObj, onUpdate }) {
         style={{ fontSize: '16px', textAlign: 'left' }}
       >
         <div
-          style={{ fontWeight: 'bold', marginTop: '16px' }}
+          style={{ marginTop: '16px' }}
         >
-          {journalObj.journalType}
+          {shortStory}<b>...</b>
         </div>
         <div
           style={{ marginTop: '6px', color: '#717171' }}
         >
-          <span>Created On : </span>{journalObj.date}
+          <span>Author : </span>
+          <b>{storyObj.authorName}</b>
+        </div>
+        <div
+          style={{ marginTop: '6px', color: '#717171' }}
+        >
+          <span>Genre : </span>
+          <b>{storyObj.journalType}</b>
         </div>
         <div
           style={{
             margin: '10px 0px',
             color: '#717171',
             display: 'flex',
-            justifyContent: 'space-around',
+            justifyContent: 'start',
           }}
         >
           <div
@@ -67,8 +78,9 @@ function JournalCard({ journalObj, onUpdate }) {
               width: '90px',
               cursor: 'pointer',
               fontWeight: 'bold',
+              marginRight: '8px',
             }}
-            onClick={viewJournal}
+            onClick={viewStory}
           >
             <img
               src="/view.png"
@@ -78,7 +90,7 @@ function JournalCard({ journalObj, onUpdate }) {
                 marginRight: '4px',
               }}
             />
-            View
+            Read
           </div>
           <div
             style={{
@@ -90,8 +102,9 @@ function JournalCard({ journalObj, onUpdate }) {
               width: '90px',
               cursor: 'pointer',
               fontWeight: 'bold',
+              marginRight: '8px',
             }}
-            onClick={editJournal}
+            onClick={editStory}
           >
             <img
               src="/edit.png"
@@ -114,7 +127,7 @@ function JournalCard({ journalObj, onUpdate }) {
               cursor: 'pointer',
               fontWeight: 'bold',
             }}
-            onClick={deleteThisJournal}
+            onClick={deleteThisStory}
           >
             <img
               src="/delete.png"
@@ -132,14 +145,20 @@ function JournalCard({ journalObj, onUpdate }) {
   );
 }
 
-JournalCard.propTypes = {
-  journalObj: PropTypes.shape({
+MyStoryCard.propTypes = {
+  storyObj: PropTypes.shape({
+    authorName: PropTypes.string,
+    title: PropTypes.string,
+    story: PropTypes.string,
+    public: PropTypes.bool,
+    date: PropTypes.string,
     imageUrl: PropTypes.string,
     journalType: PropTypes.string,
-    date: PropTypes.string,
+    journalId: PropTypes.string,
+    isPublished: PropTypes.bool,
     firebaseKey: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
 
-export default JournalCard;
+export default MyStoryCard;

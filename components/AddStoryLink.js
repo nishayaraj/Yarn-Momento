@@ -1,28 +1,49 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
-function AddStoryLink() {
+function AddStoryLink({ journalKey }) {
   const router = useRouter();
+  const newStoryLink = `/my-stories/new/${journalKey || ''}`;
 
-  const routeToNewStoryPage = () => router.push('/my-stories/new');
+  const routeToNewStoryPage = () => router.push(newStoryLink);
 
   return (
-    <Button
+    <div
       variant="light"
       onClick={routeToNewStoryPage}
-      style={{ background: 'white', height: '45px' }}
+      className="addButton"
     >
       <img
-        src="./plus.png"
-        alt="Add new Story"
-        style={{ height: '24px', marginRight: '6px' }}
+        src="/addStory.png"
+        alt="Add new story"
+        style={{
+          height: '25px',
+          objectFit: 'contain',
+          marginRight: '6px',
+        }}
       />
-      New story
-    </Button>
+      <span
+        style={{
+          fontSize: '14px',
+          marginTop: '4px',
+        }}
+      >
+        Add Story
+      </span>
+    </div>
   );
 }
+
+AddStoryLink.propTypes = {
+  journalKey: PropTypes.string,
+};
+
+AddStoryLink.defaultProps = {
+  journalKey: undefined,
+};
 
 export default AddStoryLink;
