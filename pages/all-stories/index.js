@@ -1,10 +1,10 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
-import { Button, Card } from 'react-bootstrap';
-import Link from 'next/link';
 import { useAuth } from '../../utils/context/authContext';
 import { getAllPublicStories, updateUserStoryLike, getUserProfileData } from '../../api';
-import { deleteStory } from '../../api/storiesData';
-import LikeComponent from '../../components/LikeComponent';
+import AllStoryCard from '../../components/AllStoryCard';
 
 function AllStories() {
   const { user: { uid } } = useAuth();
@@ -25,11 +25,7 @@ function AllStories() {
     }
   }, [uid]);
 
-  const deleteThisStory = (story) => {
-    if (window.confirm(`Delete ${story.title}?`)) {
-      deleteStory(story.firebaseKey).then(() => getAllPublicStories().then(setStories));
-    }
-  };
+  const onDeleteStory = () => getAllPublicStories().then(setStories);
 
   const makeUserProfileLikeObj = (storyFirebaseKey, like) => {
     let userLikedStories = userData?.likedStories;
@@ -67,35 +63,14 @@ function AllStories() {
       const isUserLikedStory = userLikedStories.includes(story.firebaseKey);
 
       return (
-        <Card
+        <AllStoryCard
           key={story.firebaseKey}
-          style={{
-            width: '400px',
-            margin: '15px',
-            padding: '10px',
-            borderRadius: '8px',
-          }}
-        >
-          <Card.Title>
-            {story.title}
-          </Card.Title>
-          <Card.Subtitle>
-            Author: {story.authorName}
-          </Card.Subtitle>
-          <Card.Body>
-            {story.story}
-          </Card.Body>
-          <Card.Footer>
-            <Link href={`/my-stories/${story.firebaseKey}`} passHref><Button variant="primary" className="m-2">VIEW</Button></Link>
-            {uid === story.uid && (<Link href={`/my-stories/edit/${story.firebaseKey}`} passHref><Button variant="info">EDIT</Button></Link>)}
-            {uid === story.uid && (<Button variant="danger" onClick={() => deleteThisStory(story)} className="m-2">DELETE</Button>)}
-            <LikeComponent
-              userLiked={isUserLikedStory}
-              counter={story.likes || 0}
-              updateLikeCounter={(like) => updateStoryLikes(story, like)}
-            />
-          </Card.Footer>
-        </Card>
+          storyObj={story}
+          onDelete={onDeleteStory}
+          userId={uid}
+          isUserLikedStory={isUserLikedStory}
+          updateStoryLikes={updateStoryLikes}
+        />
       );
     }) : 'No Public Story');
 

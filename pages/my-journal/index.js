@@ -30,7 +30,7 @@ function MyJournals() {
 
   return (
     <div className="text-center my-4">
-      <PageTitle title="My journals" path="/my-journal">
+      <PageTitle title="My journals">
         <AddJournalLink />
       </PageTitle>
       <div

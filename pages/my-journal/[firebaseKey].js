@@ -2,9 +2,10 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { viewJournalDetails } from '../../api';
-import StoryCard from '../../components/StoryCard';
+import PageTitle from '../../components/PageTitle';
+import MyStoryCard from '../../components/MyStoryCard';
+import AddStoryLink from '../../components/AddStoryLink';
 
 export default function ViewJournal() {
   const router = useRouter();
@@ -19,30 +20,20 @@ export default function ViewJournal() {
 
   const renderStories = () => ((journalDetails && journalDetails?.stories && journalDetails.stories.length > 0)
     ? journalDetails?.stories?.map((story) => (
-      <StoryCard
+      <MyStoryCard
         key={story.firebaseKey}
         storyObj={story}
-        onUpdate={() => {
-          viewJournalDetails(firebaseKey).then(setJournalDetails);
-        }}
+        onUpdate={() => viewJournalDetails(firebaseKey).then(setJournalDetails)}
       />
     )) : 'no stories found');
 
-  const newStoryLink = `/my-stories/new/${journalDetails?.journal?.firebaseKey ? journalDetails?.journal?.firebaseKey : ''}`;
-
   return (
-    <div className="mt-5 d-flex flex-wrap">
-      <div className="text-dark ms-5 details">
-        <h5>
-          Journal of {journalDetails?.journal?.journalType}
-        </h5>
-        <Link href={newStoryLink} passHref>
-          Add new story
-        </Link>
-        <div className="stories-cards-container">
-          {renderStories()}
-        </div>
-        <hr />
+    <div className="text-center my-4">
+      <PageTitle title={`Journal : ${journalDetails?.journal?.journalType}`}>
+        <AddStoryLink journalKey={journalDetails?.journal?.firebaseKey} />
+      </PageTitle>
+      <div className="d-flex flex-wrap">
+        {renderStories()}
       </div>
     </div>
   );

@@ -1,26 +1,37 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/button-has-type */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Button } from 'react-bootstrap';
 
 function AddJournalLink() {
   const router = useRouter();
   const routeToNewJournalPage = () => router.push('/my-journal/new');
 
   return (
-    <Button
+    <div
       variant="light"
       onClick={routeToNewJournalPage}
-      style={{ background: 'white', height: '45px' }}
+      className="addButton"
     >
       <img
-        src="./plus.png"
+        src="/addJournal.png"
         alt="Add new journal"
-        style={{ height: '24px', marginRight: '6px' }}
+        style={{
+          height: '25px',
+          objectFit: 'contain',
+          marginRight: '6px',
+        }}
       />
-      New journal
-    </Button>
+      <span
+        style={{
+          fontSize: '14px',
+        }}
+      >
+        Add Journal
+      </span>
+    </div>
   );
 }
 

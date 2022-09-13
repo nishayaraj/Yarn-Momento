@@ -200,7 +200,7 @@ function StoryForm({ obj }) {
       </FloatingLabel>
 
       <Form.Check
-        className="text-white mb-3"
+        className="text-black mb-3"
         type="switch"
         name="isPublic"
         id="isPublic"
@@ -211,7 +211,7 @@ function StoryForm({ obj }) {
       />
 
       <Form.Check
-        className="text-white mb-3"
+        className="text-black mb-3"
         type="switch"
         id="isPublished"
         name="isPublished"
