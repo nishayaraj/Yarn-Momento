@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable no-console */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import Link from 'next/link';
 import {
-  Navbar, Container, Nav, Button, Form,
+  Navbar, Container, Button, Form,
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { signIn } from '../utils/auth';
@@ -22,38 +20,60 @@ export default function LoggedOutNavBar({ getSearchTerm }) {
   };
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      bg="light"
+      variant="light"
+      fixed="top"
+      style={{ boxShadow: '0 2px 4px -1px rgb(57 76 96 / 15%)' }}
+    >
       <Container>
         <div>
-          <img src="/logo.png" alt="logo" style={{ height: '90px', width: '100px', paddingRight: '10px' }} />
+          <img src="/logo.png" alt="logo" style={{ height: '50px', paddingRight: '10px' }} />
         </div>
         <Link passHref href="/">
           <Navbar.Brand>Yarn Momento</Navbar.Brand>
         </Link>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Button variant="danger" onClick={signIn}>Sign In</Button>
-          </Nav>
-          <Form
-            className="d-flex"
-            onSubmit={searchHandler}
-          >
-            <Form.Control
-              type="search"
-              value={searchTerm}
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-              onChange={onChangeHandler}
-            />
-            <Button
-              type="submit"
-              variant="outline-success"
+        <Navbar.Toggle aria-controls="responsive-loggedout-navbar-nav" />
+        <Navbar.Collapse id="responsive-loggedout-navbar-nav" style={{ justifyContent: 'right' }}>
+          <div>
+            <Form
+              className="d-flex logoutNavItem-search"
+              onSubmit={searchHandler}
+              style={{
+                fontSize: '14px',
+                border: '1px solid lightgray',
+                background: 'white',
+                borderRadius: '8px',
+              }}
             >
-              Search
-            </Button>
-          </Form>
+              <Form.Control
+                type="search"
+                value={searchTerm}
+                placeholder="Story title"
+                aria-label="Story title search"
+                onChange={onChangeHandler}
+                className="loggedout-nav-search-input"
+              />
+              <button
+                type="submit"
+                variant="outline-success"
+                style={{
+                  color: 'green',
+                  border: 'none',
+                  background: 'none',
+                }}
+              >
+                Search
+              </button>
+            </Form>
+          </div>
+          <div
+            className="logoutNavItem-loginbutton"
+          >
+            <Button variant="primary" onClick={signIn} style={{ fontSize: '14px' }}>Sign In</Button>
+          </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>

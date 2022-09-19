@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import AddJournalLink from '../../components/AddJournalLink';
 import PageTitle from '../../components/PageTitle';
 import { useAuth } from '../../utils/context/authContext';
@@ -12,13 +10,13 @@ function MyJournals() {
 
   const { user } = useAuth();
 
-  const getAllMyJournals = () => {
+  const getAllMyJournals = useCallback(() => {
     getMyJournals(user.uid).then(setJournals);
-  };
+  }, [user]);
 
   useEffect(() => {
     getAllMyJournals();
-  }, [user]);
+  }, [getAllMyJournals, user]);
 
   const renderJournal = () => journals.map((journal) => (
     <JournalCard

@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -24,7 +22,7 @@ function MyStoryCard({ storyObj, onUpdate }) {
   return (
     <div
       style={{
-        margin: '0px 16px 16px',
+        margin: '0px 20px 20px',
         width: '300px',
       }}
     >
@@ -41,12 +39,12 @@ function MyStoryCard({ storyObj, onUpdate }) {
         />
       </div>
       <div
-        style={{ fontSize: '16px', textAlign: 'left' }}
+        style={{ fontSize: '16px', textAlign: 'left', paddingTop: '16px' }}
       >
         <div
-          style={{ marginTop: '16px' }}
+          style={{ color: '#717171' }}
         >
-          {shortStory}<b>...</b>
+          <b>{storyObj.title}</b>
         </div>
         <div
           style={{ marginTop: '6px', color: '#717171' }}
@@ -61,6 +59,11 @@ function MyStoryCard({ storyObj, onUpdate }) {
           <b>{storyObj.journalType}</b>
         </div>
         <div
+          style={{ marginTop: '6px' }}
+        >
+          {shortStory}<b>...</b>
+        </div>
+        <div
           style={{
             margin: '10px 0px',
             color: '#717171',
@@ -68,7 +71,8 @@ function MyStoryCard({ storyObj, onUpdate }) {
             justifyContent: 'start',
           }}
         >
-          <div
+          <button
+            type="button"
             style={{
               display: 'flex',
               padding: '6px',
@@ -79,6 +83,7 @@ function MyStoryCard({ storyObj, onUpdate }) {
               cursor: 'pointer',
               fontWeight: 'bold',
               marginRight: '8px',
+              background: 'none',
             }}
             onClick={viewStory}
           >
@@ -91,8 +96,9 @@ function MyStoryCard({ storyObj, onUpdate }) {
               }}
             />
             Read
-          </div>
-          <div
+          </button>
+          <button
+            type="button"
             style={{
               display: 'flex',
               padding: '6px',
@@ -103,6 +109,7 @@ function MyStoryCard({ storyObj, onUpdate }) {
               cursor: 'pointer',
               fontWeight: 'bold',
               marginRight: '8px',
+              background: 'none',
             }}
             onClick={editStory}
           >
@@ -115,8 +122,9 @@ function MyStoryCard({ storyObj, onUpdate }) {
               }}
             />
             Edit
-          </div>
-          <div
+          </button>
+          <button
+            type="button"
             style={{
               display: 'flex',
               padding: '6px',
@@ -126,6 +134,7 @@ function MyStoryCard({ storyObj, onUpdate }) {
               width: '90px',
               cursor: 'pointer',
               fontWeight: 'bold',
+              background: 'none',
             }}
             onClick={deleteThisStory}
           >
@@ -138,7 +147,7 @@ function MyStoryCard({ storyObj, onUpdate }) {
               }}
             />
             Delete
-          </div>
+          </button>
         </div>
       </div>
     </div>

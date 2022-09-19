@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useAuth } from './context/authContext';
 import Loading from '../components/Loading';
-import Landing from '../components/Landing';
+import LoggedoutAllStories from '../components/LoggedoutAllStories';
 import NavBar from '../components/NavBar';
 
 const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) => {
@@ -22,7 +22,11 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
     );
   }
 
-  return <Landing />;
+  return (
+    <div className="container page-container">
+      <LoggedoutAllStories />
+    </div>
+  );
 };
 
 export default ViewDirectorBasedOnUserAuthStatus;

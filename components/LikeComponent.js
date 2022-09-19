@@ -1,8 +1,5 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 export default function LikeComponent({
@@ -30,37 +27,34 @@ export default function LikeComponent({
   };
 
   return (
-    <div
+    <button
+      type="button"
       style={{
         display: 'flex',
         alignItems: 'center',
-        cursor: 'pointer',
+        border: 'none',
+        background: 'none',
+        padding: 0,
+        margin: 0,
       }}
       onClick={() => updateLikeOption(!liked)}
     >
       {
         !disableLikeOption && (
-        <Button
-          style={{
-            border: 'none',
-            background: 'none',
-            padding: 0,
-            margin: 0,
-          }}
-        >
+        <span>
           {
             liked
               ? <AiFillHeart color="red" fontSize="25px" />
               : <AiOutlineHeart color="gray" fontSize="25px" />
           }
-        </Button>
+        </span>
         )
       }
       {
         !!likeCount
-          && <div style={{ marginLeft: '6px' }}>{likeCount} Likes</div>
+          && <div style={{ ...(disableLikeOption ? {} : { marginLeft: '6px' }) }}>{likeCount} Likes</div>
       }
-    </div>
+    </button>
   );
 }
 

@@ -1,19 +1,18 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 
-function AddStoryLink({ journalKey }) {
+function AddStoryLink({ journalId, journalType }) {
   const router = useRouter();
-  const newStoryLink = `/my-stories/new/${journalKey || ''}`;
+  const queryParam = journalId && journalType ? `?journalId=${journalId}&journalType=${journalType}` : '';
+  const newStoryLink = `/my-stories/new/${queryParam}`;
 
   const routeToNewStoryPage = () => router.push(newStoryLink);
 
   return (
-    <div
-      variant="light"
+    <button
+      type="button"
       onClick={routeToNewStoryPage}
       className="addButton"
     >
@@ -34,16 +33,18 @@ function AddStoryLink({ journalKey }) {
       >
         Add Story
       </span>
-    </div>
+    </button>
   );
 }
 
 AddStoryLink.propTypes = {
-  journalKey: PropTypes.string,
+  journalId: PropTypes.string,
+  journalType: PropTypes.string,
 };
 
 AddStoryLink.defaultProps = {
-  journalKey: undefined,
+  journalId: undefined,
+  journalType: undefined,
 };
 
 export default AddStoryLink;

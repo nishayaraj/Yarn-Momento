@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useAuth } from '../../utils/context/authContext';
 import PageTitle from '../../components/PageTitle';
 import MyStoryCard from '../../components/MyStoryCard';
@@ -11,13 +10,13 @@ function MyStories() {
 
   const { user } = useAuth();
 
-  const getAllTheStories = () => {
+  const getAllTheStories = useCallback(() => {
     getMyStories(user.uid).then(setStories);
-  };
+  }, [user]);
 
   useEffect(() => {
     getAllTheStories();
-  }, [user]);
+  }, [getAllTheStories, user]);
 
   return (
     <div className="text-center my-4">

@@ -1,7 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
@@ -57,7 +54,8 @@ function JournalCard({ journalObj, onUpdate }) {
             justifyContent: 'space-around',
           }}
         >
-          <div
+          <button
+            type="button"
             style={{
               display: 'flex',
               padding: '6px',
@@ -67,6 +65,7 @@ function JournalCard({ journalObj, onUpdate }) {
               width: '90px',
               cursor: 'pointer',
               fontWeight: 'bold',
+              background: 'none',
             }}
             onClick={viewJournal}
           >
@@ -79,8 +78,9 @@ function JournalCard({ journalObj, onUpdate }) {
               }}
             />
             View
-          </div>
-          <div
+          </button>
+          <button
+            type="button"
             style={{
               display: 'flex',
               padding: '6px',
@@ -90,6 +90,7 @@ function JournalCard({ journalObj, onUpdate }) {
               width: '90px',
               cursor: 'pointer',
               fontWeight: 'bold',
+              background: 'none',
             }}
             onClick={editJournal}
           >
@@ -102,8 +103,9 @@ function JournalCard({ journalObj, onUpdate }) {
               }}
             />
             Edit
-          </div>
-          <div
+          </button>
+          <button
+            type="button"
             style={{
               display: 'flex',
               padding: '6px',
@@ -113,6 +115,7 @@ function JournalCard({ journalObj, onUpdate }) {
               width: '90px',
               cursor: 'pointer',
               fontWeight: 'bold',
+              background: 'none',
             }}
             onClick={deleteThisJournal}
           >
@@ -125,7 +128,7 @@ function JournalCard({ journalObj, onUpdate }) {
               }}
             />
             Delete
-          </div>
+          </button>
         </div>
       </div>
     </div>
