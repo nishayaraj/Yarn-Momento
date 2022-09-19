@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -27,7 +25,7 @@ function AllStoryCard({
   return (
     <div
       style={{
-        margin: '0px 16px 16px',
+        margin: '0px 20px 20px',
         width: '300px',
       }}
     >
@@ -55,12 +53,12 @@ function AllStoryCard({
         </div>
       </div>
       <div
-        style={{ fontSize: '16px', textAlign: 'left' }}
+        style={{ fontSize: '16px', textAlign: 'left', paddingTop: '16px' }}
       >
         <div
-          style={{ marginTop: '16px' }}
+          style={{ color: '#717171' }}
         >
-          {shortStory}<b>...</b>
+          <b>{storyObj.title}</b>
         </div>
         <div
           style={{ marginTop: '6px', color: '#717171' }}
@@ -75,6 +73,11 @@ function AllStoryCard({
           <b>{storyObj.journalType}</b>
         </div>
         <div
+          style={{ marginTop: '6px' }}
+        >
+          {shortStory}<b>...</b>
+        </div>
+        <div
           style={{
             margin: '10px 0px',
             color: '#717171',
@@ -82,7 +85,8 @@ function AllStoryCard({
             justifyContent: 'start',
           }}
         >
-          <div
+          <button
+            type="button"
             style={{
               display: 'flex',
               padding: '6px',
@@ -93,6 +97,7 @@ function AllStoryCard({
               cursor: 'pointer',
               fontWeight: 'bold',
               marginRight: '8px',
+              background: 'none',
             }}
             onClick={viewStory}
           >
@@ -105,10 +110,11 @@ function AllStoryCard({
               }}
             />
             Read
-          </div>
+          </button>
           {
             userId === storyObj.uid && (
-              <div
+              <button
+                type="button"
                 style={{
                   display: 'flex',
                   padding: '6px',
@@ -119,6 +125,7 @@ function AllStoryCard({
                   cursor: 'pointer',
                   fontWeight: 'bold',
                   marginRight: '8px',
+                  background: 'none',
                 }}
                 onClick={editStory}
               >
@@ -131,11 +138,12 @@ function AllStoryCard({
                   }}
                 />
                 Edit
-              </div>
+              </button>
             )
 }
           {userId === storyObj.uid && (
-          <div
+          <button
+            type="button"
             style={{
               display: 'flex',
               padding: '6px',
@@ -145,6 +153,7 @@ function AllStoryCard({
               width: '90px',
               cursor: 'pointer',
               fontWeight: 'bold',
+              background: 'none',
             }}
             onClick={deleteThisStory}
           >
@@ -157,7 +166,7 @@ function AllStoryCard({
               }}
             />
             Delete
-          </div>
+          </button>
           )}
         </div>
       </div>

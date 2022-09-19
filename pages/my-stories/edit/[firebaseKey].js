@@ -13,5 +13,5 @@ export default function EditStory() {
     getSingleStory(firebaseKey).then(setEditStory);
   }, [firebaseKey]);
 
-  return (<StoryForm obj={editStory} />);
+  return (<StoryForm storyObj={editStory} />);
 }

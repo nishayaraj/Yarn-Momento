@@ -1,10 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-console */
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-// import Link from 'next/link';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import AddJournalLink from '../AddJournalLink';
@@ -12,6 +9,7 @@ import { useAuth } from '../../utils/context/authContext';
 import { createStory, getMyJournals, updateStory } from '../../api';
 
 const initialState = {
+  firebaseKey: '',
   title: '',
   authorName: '',
   story: '',
@@ -23,37 +21,47 @@ const initialState = {
   isPublished: false,
 };
 
-function StoryForm({ obj }) {
+function StoryForm({ storyObj }) {
+  const { user } = useAuth();
+  const router = useRouter();
+
   const [formInput, setFormInput] = useState(initialState);
   const [journals, setJournals] = useState([]);
-  const publicToggleRef = useRef(null);
-  const router = useRouter();
-  const { user } = useAuth();
 
+  useEffect(() => (storyObj?.firebaseKey || storyObj?.journalId) && setFormInput({ ...initialState, ...(storyObj || {}) }), [storyObj]);
+
+  useEffect(() => {
+    getMyJournals(user.uid).then((journalsData) => {
+      setJournals(journalsData);
+    });
+  }, [user]);
+
+  // handles form element change
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    if (name === 'journalId') {
-      const { journalType } = journals.find((journal) => journal.firebaseKey === value) || { journalType: undefined };
-      let { isPublic } = formInput;
-      if (journalType && journalType.toLowerCase().includes('personal')) {
-        publicToggleRef.current.disabled = true;
-        isPublic = false;
-      } else {
-        publicToggleRef.current.disabled = false;
-      }
-      setFormInput({
-        ...formInput, [name]: value, journalType, isPublic,
-      });
-    } else {
-      setFormInput({ ...formInput, [name]: value });
-    }
+    setFormInput({ ...formInput, [name]: value });
   };
 
+  // handles journal type form element change
+  const handleJournalTypeChange = (e) => {
+    const journalId = e.target.value;
+    let { isPublic } = formInput;
+
+    const { journalType } = journals.find((journal) => journal.firebaseKey === journalId) || { journalType: undefined };
+    if (journalType && journalType.toLowerCase().includes('personal')) {
+      isPublic = false;
+    }
+    setFormInput({
+      ...formInput, journalId, journalType, isPublic,
+    });
+  };
+
+  // handles toggle button form element change
   const handleToggleChange = (e) => {
     const { name, checked = false } = e.target;
     let { journalId, journalType } = formInput;
-    if (name === 'isPublic' && journalType.toLowerCase().includes('personal')) {
+
+    if (name === 'isPublic' && journalType?.toLowerCase().includes('personal')) {
       journalId = '';
       journalType = '';
     }
@@ -65,7 +73,7 @@ function StoryForm({ obj }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (obj.firebaseKey) {
+    if (formInput.firebaseKey) {
       updateStory(formInput).then(() => router.back());
     } else {
       const payload = { ...formInput, uid: user.uid };
@@ -75,22 +83,13 @@ function StoryForm({ obj }) {
     }
   };
 
-  useEffect(() => {
-    getMyJournals(user.uid).then((journalsData) => {
-      setJournals(journalsData);
-      if (obj.firebaseKey) {
-        setFormInput(obj);
-      } else if (obj.journalId) {
-        handleChange({ target: { name: 'journalId', value: obj.journalId } });
-      }
-    });
-  }, [obj, user]);
+  const isPublicToggleDisabled = () => (formInput?.journalType?.toLowerCase().includes('personal'));
 
   const renderStoryTypeOptions = () => journals.map((journal) => (
     <option
       key={journal.firebaseKey}
       value={journal.firebaseKey}
-      selected={obj.journalId === journal.firebaseKey}
+      selected={formInput.journalId === journal.firebaseKey}
     >
       {journal.journalType}
     </option>
@@ -99,7 +98,7 @@ function StoryForm({ obj }) {
   return (
     <Form onSubmit={handleSubmit} style={{ color: 'black' }}>
       <h2 className="text-black mt-5">
-        {obj.firebaseKey ? 'Update' : 'Create'}
+        {formInput.firebaseKey ? 'Update' : 'Create'}
         Story
       </h2>
 
@@ -172,7 +171,7 @@ function StoryForm({ obj }) {
         <Form.Select
           aria-label="Journal"
           name="journalId"
-          onChange={handleChange}
+          onChange={handleJournalTypeChange}
           className="mb-3"
           required
         >
@@ -181,7 +180,6 @@ function StoryForm({ obj }) {
         </Form.Select>
       </FloatingLabel>
 
-      {/* ToDo: change this to a link */}
       <div style={{ margin: '20px' }}><AddJournalLink /> </div>
 
       <FloatingLabel
@@ -206,8 +204,8 @@ function StoryForm({ obj }) {
         id="isPublic"
         label="Is this a public story ?"
         checked={formInput.isPublic}
-        ref={publicToggleRef}
         onChange={handleToggleChange}
+        disabled={isPublicToggleDisabled()}
       />
 
       <Form.Check
@@ -220,13 +218,13 @@ function StoryForm({ obj }) {
         onChange={handleToggleChange}
       />
 
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Story</Button>
+      <Button type="submit">{formInput.firebaseKey ? 'Update' : 'Create'} Story</Button>
     </Form>
   );
 }
 
 StoryForm.propTypes = {
-  obj: PropTypes.shape({
+  storyObj: PropTypes.shape({
     firebaseKey: PropTypes.string,
     title: PropTypes.string,
     authorName: PropTypes.string,
@@ -241,7 +239,7 @@ StoryForm.propTypes = {
 };
 
 StoryForm.defaultProps = {
-  obj: initialState,
+  storyObj: initialState,
 };
 
 export default StoryForm;

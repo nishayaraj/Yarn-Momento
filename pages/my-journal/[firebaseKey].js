@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -30,7 +29,7 @@ export default function ViewJournal() {
   return (
     <div className="text-center my-4">
       <PageTitle title={`Journal : ${journalDetails?.journal?.journalType}`}>
-        <AddStoryLink journalKey={journalDetails?.journal?.firebaseKey} />
+        <AddStoryLink journalId={journalDetails?.journal?.firebaseKey} journalType={journalDetails?.journal?.journalType} />
       </PageTitle>
       <div className="d-flex flex-wrap">
         {renderStories()}
