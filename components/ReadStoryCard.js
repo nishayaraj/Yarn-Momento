@@ -13,7 +13,11 @@ function ReadStoryCard({
         paddingTop: '20px',
       }}
     >
-      <div>
+      <div
+        style={{
+          display: 'flex',
+        }}
+      >
         <img
           src={storyObj.imageUrl}
           alt={storyObj.title}
