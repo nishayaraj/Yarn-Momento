@@ -10,7 +10,10 @@ function LoggedoutAllStoryCard({
     <div
       style={{
         margin: '0px 20px 20px',
-        width: '300px',
+        width: '320px',
+        border: '1px solid lightgray',
+        padding: '10px',
+        borderRadius: '8px',
       }}
     >
       <div>
@@ -53,7 +56,9 @@ function LoggedoutAllStoryCard({
           <b>{storyObj.journalType}</b>
         </div>
         <div
-          style={{ marginTop: '6px' }}
+          style={{
+            marginTop: '6px',
+          }}
         >
           {storyObj.story}
         </div>
@@ -64,6 +69,7 @@ function LoggedoutAllStoryCard({
 
 LoggedoutAllStoryCard.propTypes = {
   storyObj: PropTypes.shape({
+    firebaseKey: PropTypes.string,
     authorName: PropTypes.string,
     title: PropTypes.string,
     story: PropTypes.string,
