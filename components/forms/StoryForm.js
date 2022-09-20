@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import AddJournalLink from '../AddJournalLink';
 import { useAuth } from '../../utils/context/authContext';
+import PageTitle from '../PageTitle';
 import { createStory, getMyJournals, updateStory } from '../../api';
 
 const initialState = {
@@ -96,16 +97,24 @@ function StoryForm({ storyObj }) {
   ));
 
   return (
-    <Form onSubmit={handleSubmit} style={{ color: 'black' }}>
-      <h2 className="text-black mt-5">
-        {formInput.firebaseKey ? 'Update' : 'Create'}
-        Story
-      </h2>
-
+    <Form
+      onSubmit={handleSubmit}
+      style={{
+        color: 'black',
+        lineHeight: '25px',
+        padding: '30px 40px',
+        border: '1px solid lightgray',
+        borderRadius: '8px',
+        marginBottom: '20px',
+        background: 'white',
+      }}
+    >
+      <PageTitle title={`${formInput.firebaseKey ? `Update : ${storyObj.title}` : 'Create story'}`} />
       <FloatingLabel
         controlId="floatingInput1"
         label="Story Title"
         className="mb-3"
+        style={{ marginTop: '18px' }}
       >
         <Form.Control
           type="text"
@@ -120,24 +129,30 @@ function StoryForm({ storyObj }) {
         controlId="floatingInput2"
         label="Story"
         className="mb-3"
+        style={{ marginTop: '25px' }}
       >
         <Form.Control
-          type="textarea"
+          as="textarea"
+          rows={3}
           placeholder="Weave your Story here"
           maxLength={800}
-          rows={7}
           name="story"
           value={formInput.story}
           onChange={handleChange}
           required
+          style={{
+            lineHeight: '25px',
+            minHeight: '200px',
+          }}
         />
-        <p>Character Limit: {formInput.story && `${formInput.story.length}/800`}</p>
+        <div style={{ margin: '4px 0px 20px', fontSize: '14px' }}>Limit: {formInput.story && `${formInput.story.length}/800`}</div>
       </FloatingLabel>
 
       <FloatingLabel
         controlId="floatingInput2"
         label="Author Name"
         className="mb-3"
+        style={{ marginTop: '25px' }}
       >
         <Form.Control
           type="text"
@@ -153,6 +168,7 @@ function StoryForm({ storyObj }) {
         controlId="floatingInput2"
         label="Story Image"
         className="mb-3"
+        style={{ marginTop: '25px' }}
       >
         <Form.Control
           type="imageUrl"
@@ -167,6 +183,7 @@ function StoryForm({ storyObj }) {
       <FloatingLabel
         controlId="floatingSelect"
         label="Journal Type"
+        style={{ marginTop: '25px' }}
       >
         <Form.Select
           aria-label="Journal"
@@ -179,13 +196,12 @@ function StoryForm({ storyObj }) {
           {renderStoryTypeOptions()}
         </Form.Select>
       </FloatingLabel>
-
-      <div style={{ margin: '20px' }}><AddJournalLink /> </div>
-
+      <div style={{ marginTop: '8px' }}><AddJournalLink /> </div>
       <FloatingLabel
         controlId="floatingInput2"
         label="Date"
         className="mb-3"
+        style={{ marginTop: '25px' }}
       >
         <Form.Control
           type="date"
@@ -206,6 +222,7 @@ function StoryForm({ storyObj }) {
         checked={formInput.isPublic}
         onChange={handleToggleChange}
         disabled={isPublicToggleDisabled()}
+        style={{ marginTop: '25px' }}
       />
 
       <Form.Check
@@ -216,9 +233,19 @@ function StoryForm({ storyObj }) {
         label="Is Published ?"
         checked={formInput.isPublished}
         onChange={handleToggleChange}
+        style={{ marginTop: '25px' }}
       />
 
-      <Button type="submit">{formInput.firebaseKey ? 'Update' : 'Create'} Story</Button>
+      <Button
+        type="submit"
+        style={{
+          marginTop: '25px',
+          background: '#f38449',
+          border: '1px solid #f38449',
+        }}
+      >
+        {formInput.firebaseKey ? 'Update' : 'Create'} Story
+      </Button>
     </Form>
   );
 }

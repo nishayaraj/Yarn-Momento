@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
+import PageTitle from '../PageTitle';
 import { useAuth } from '../../utils/context/authContext';
 import { createJournal, updateAJournal } from '../../api';
 
@@ -42,12 +43,24 @@ function JournalForm({ obj }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit} style={{ color: 'black' }}>
-      <h2 className="text-black mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Journal</h2>
+    <Form
+      onSubmit={handleSubmit}
+      style={{
+        color: 'black',
+        lineHeight: '25px',
+        padding: '30px 40px',
+        border: '1px solid lightgray',
+        borderRadius: '8px',
+        marginBottom: '20px',
+        background: 'white',
+      }}
+    >
+      <PageTitle title={`${obj.firebaseKey ? `Update : ${obj.journalType}` : 'Create story'}`} />
       <FloatingLabel
         controlId="floatingInput1"
         label="Journal Type"
         className="mb-3"
+        style={{ marginTop: '18px' }}
       >
         <Form.Control
           type="text"
@@ -57,13 +70,21 @@ function JournalForm({ obj }) {
           onChange={handleChange}
           required
         />
-        Journal & stories from journal named &quot;personal&quot; will be private to the user
+        <div
+          style={{
+            marginTop: '6px',
+            fontSize: '14px',
+          }}
+        >
+          Journal & stories from journal named &quot;personal&quot; will be private to the user
+        </div>
       </FloatingLabel>
 
       <FloatingLabel
         controlId="floatingInput2"
         label="Journal Image"
         className="mb-3"
+        style={{ marginTop: '25px' }}
       >
         <Form.Control
           type="imageUrl"
@@ -79,6 +100,7 @@ function JournalForm({ obj }) {
         controlId="floatingInput2"
         label="Date"
         className="mb-3"
+        style={{ marginTop: '25px' }}
       >
         <Form.Control
           type="date"
@@ -90,7 +112,16 @@ function JournalForm({ obj }) {
         />
       </FloatingLabel>
 
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Journal</Button>
+      <Button
+        type="submit"
+        style={{
+          marginTop: '25px',
+          background: '#f38449',
+          border: '1px solid #f38449',
+        }}
+      >
+        {obj.firebaseKey ? 'Update' : 'Create'} Journal
+      </Button>
     </Form>
 
   );

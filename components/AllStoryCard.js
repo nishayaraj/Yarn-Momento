@@ -26,7 +26,10 @@ function AllStoryCard({
     <div
       style={{
         margin: '0px 20px 20px',
-        width: '300px',
+        width: '320px',
+        border: '1px solid lightgray',
+        padding: '10px',
+        borderRadius: '8px',
       }}
     >
       <div>

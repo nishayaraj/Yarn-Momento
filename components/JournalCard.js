@@ -19,7 +19,12 @@ function JournalCard({ journalObj, onUpdate }) {
 
   return (
     <div
-      style={{ margin: '0px 16px 16px' }}
+      style={{
+        margin: '0px 16px 16px',
+        border: '1px solid lightgray',
+        padding: '10px',
+        borderRadius: '8px',
+      }}
     >
       <div>
         <img
@@ -42,7 +47,7 @@ function JournalCard({ journalObj, onUpdate }) {
           {journalObj.journalType}
         </div>
         <div
-          style={{ marginTop: '6px', color: '#717171' }}
+          style={{ marginTop: '6px' }}
         >
           <span>Created On : </span>{journalObj.date}
         </div>

@@ -3,9 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LikeComponent from './LikeComponent';
 
-function ReadStoryCard({
-  storyObj,
-}) {
+function ReadStoryCard({ storyObj }) {
   return (
     <div
       style={{

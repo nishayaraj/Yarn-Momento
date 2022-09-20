@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import ReadStoryCard from '../../components/ReadStoryCard';
 import { getSingleStory } from '../../api/storiesData';
+import ReadStoryCard from '../../components/ReadStoryCard';
 
 export default function ViewStoryCards() {
   const [storyDetails, setStoryDetails] = useState({});

@@ -60,7 +60,8 @@ export default function LoggedOutNavBar({ getSearchTerm }) {
                 type="submit"
                 variant="outline-success"
                 style={{
-                  color: 'green',
+                  color: 'black',
+                  fontWeight: 'bold',
                   border: 'none',
                   background: 'none',
                 }}
@@ -72,7 +73,17 @@ export default function LoggedOutNavBar({ getSearchTerm }) {
           <div
             className="logoutNavItem-loginbutton"
           >
-            <Button variant="primary" onClick={signIn} style={{ fontSize: '14px' }}>Sign In</Button>
+            <Button
+              variant="primary"
+              onClick={signIn}
+              style={{
+                fontSize: '14px',
+                border: '1px solid #f38449',
+                background: '#f38449',
+              }}
+            >
+              Sign In
+            </Button>
           </div>
         </Navbar.Collapse>
       </Container>
