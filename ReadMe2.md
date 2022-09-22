@@ -2,7 +2,7 @@
 
 ## Primary Features
 
-- YArn Momento - A single page application built for Short story Readers, writers and secret keepers who has a personal journal.
+- Yarn Momento - A single page application built for Short story Readers, writers and secret keepers who has a personal journal.
 - Users can login using google authentication.
 - Users are welcomed to the loading page with unautheticated user view which provides short story cards for reading.
 - Users can search existing stories in Landing page by story title.
@@ -10,6 +10,7 @@
 - Users can view, edit and delete journals and stories in addition to creating them.
 - Users can view all stories set to public and is published by other users n the All stories page.
 - Users can view, edit and delete stories they created and only read stories craeted by anotehr user.
+- Users can like a story or take away a like they gave to the story
 - Users can logout of the app using the sign out button on navbar.
 
 ## Target Audience
@@ -42,6 +43,8 @@
   - To edit a story or journal, click on edit button and change the prepopulated form to your preference. 
   - To delete a story/journal, press the delete button, click ok on the pop up to delete, or cancel to not delete. The journal and its stories will be deleted.
   - To search for a story in the unautheticated landing page, type in the story title fully or partially on the search bar.
+  - To create a pure personal entry, name the journal personal. The public option will be deactivated.
+  - To like a story, click on the heart shaped button. You can unlike but clicking the button again.
 
 ## Design Wireframes and data flow
 
@@ -49,15 +52,15 @@ Please refer the [data flow document] (https://whimsical.com/yarn-momento-wirefr
 
 ## App screenshots
 
-1. [Authenticated My Stories Page](./YarnMomentoIn%20Action/Autheticated%20Landing%20page.png)
-2. [Unauthenticated Loading page](./YarnMomentoIn%20Action/Unautheticated%20Users%20Landing%20Page.png)
-3. [My Journals page](./YarnMomentoIn%20Action/My%20Journals%20Page.png)
-4. [All stories page](./YarnMomentoIn%20Action/All%20Stories%20Page.png)
+1. [Authenticated My Stories Page](./YarnMomentoIn%20Action/my%20stories%20page.png)
+2. [Unauthenticated Loading page](./YarnMomentoIn%20Action/unauthenticated%20loading%20page.png)
+3. [My Journals page](./YarnMomentoIn%20Action/my%20journal%20page.png)
+4. [All stories page](./YarnMomentoIn%20Action/Page%20of%20all%20stories%20.png)
 
 ## App screen recording
 
-[Yarn Momento in action](https://www.loom.com/share/f9eb140110b840f09e2f242834fd0708)
+[Yarn Momento in action](https://www.loom.com/share/fd7d0d2d224742619305d76b983660ba)
 
-## App planning doc
+## App planning doc 
 
 [planning document ERD](https://dbdiagram.io/d/62fc3411c2d9cf52fabcf7d3)
