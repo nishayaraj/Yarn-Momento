@@ -55,7 +55,7 @@ function JournalForm({ obj }) {
         background: 'white',
       }}
     >
-      <PageTitle title={`${obj.firebaseKey ? `Update : ${obj.journalType}` : 'Create story'}`} />
+      <PageTitle title={`${obj.firebaseKey ? `Update : ${obj.journalType}` : 'Create Journal'}`} />
       <FloatingLabel
         controlId="floatingInput1"
         label="Journal Type"

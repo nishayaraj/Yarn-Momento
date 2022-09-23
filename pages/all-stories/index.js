@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
+import PageTitle from '../../components/PageTitle';
 import { useAuth } from '../../utils/context/authContext';
 import { getAllPublicStories, updateUserStoryLike, getUserProfileData } from '../../api';
 import AllStoryCard from '../../components/AllStoryCard';
@@ -74,7 +75,7 @@ function AllStories() {
 
   return (
     <div>
-      <h1>All Stories</h1>
+      <PageTitle title="All Stories" />
       <div
         style={{
           display: 'flex',
