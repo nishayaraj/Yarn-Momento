@@ -2,12 +2,12 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import {
-  Navbar, Container, Button, Form,
+  Navbar, Container, Form,
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { signIn } from '../utils/auth';
 
-export default function LoggedOutNavBar({ getSearchTerm }) {
+export default function LoggedOutNavBar({ getSearchTerm, inSearchFocus }) {
   const [searchTerm, setSearchTerm] = useState('');
   const searchHandler = (e) => {
     e.preventDefault();
@@ -30,7 +30,11 @@ export default function LoggedOutNavBar({ getSearchTerm }) {
     >
       <Container>
         <div>
-          <img src="/logo.png" alt="logo" style={{ height: '50px', paddingRight: '10px' }} />
+          <img
+            src="/YMNavLogo.png"
+            alt="YM"
+            className="nav-app-logo"
+          />
         </div>
         <Link passHref href="/">
           <Navbar.Brand>Yarn Momento</Navbar.Brand>
@@ -41,12 +45,6 @@ export default function LoggedOutNavBar({ getSearchTerm }) {
             <Form
               className="d-flex logoutNavItem-search"
               onSubmit={searchHandler}
-              style={{
-                fontSize: '14px',
-                border: '1px solid lightgray',
-                background: 'white',
-                borderRadius: '8px',
-              }}
             >
               <Form.Control
                 type="search"
@@ -54,6 +52,7 @@ export default function LoggedOutNavBar({ getSearchTerm }) {
                 placeholder="Story title"
                 aria-label="Story title search"
                 onChange={onChangeHandler}
+                onFocus={inSearchFocus}
                 className="loggedout-nav-search-input"
               />
               <button
@@ -61,9 +60,9 @@ export default function LoggedOutNavBar({ getSearchTerm }) {
                 variant="outline-success"
                 style={{
                   color: 'black',
-                  fontWeight: 'bold',
                   border: 'none',
-                  background: 'none',
+                  background: 'white',
+                  fontSize: '14px',
                 }}
               >
                 Search
@@ -73,17 +72,18 @@ export default function LoggedOutNavBar({ getSearchTerm }) {
           <div
             className="logoutNavItem-loginbutton"
           >
-            <Button
-              variant="primary"
+            <button
+              type="button"
+              className="loggedout-nav-button"
               onClick={signIn}
-              style={{
-                fontSize: '14px',
-                border: '1px solid #f38449',
-                background: '#f38449',
-              }}
             >
-              Sign In
-            </Button>
+              <img
+                className="loggedout-nav-button-icon"
+                src="/loginBook.gif"
+                alt="login"
+              />
+              Sign in
+            </button>
           </div>
         </Navbar.Collapse>
       </Container>
@@ -93,4 +93,5 @@ export default function LoggedOutNavBar({ getSearchTerm }) {
 
 LoggedOutNavBar.propTypes = {
   getSearchTerm: PropTypes.func.isRequired,
+  inSearchFocus: PropTypes.func.isRequired,
 };

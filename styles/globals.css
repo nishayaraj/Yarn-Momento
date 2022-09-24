@@ -55,9 +55,10 @@ font-weight: bold;
 }
 .logoutNavItem-search {
   font-size: 14px;
-  border: 1px solid lightgray;
+  border: 0.5px solid black;
   background: white;
-  border-radius: 8px;
+  border-radius: 100px;
+  padding: 0px 15px 0px 10px;
 }
 
 @media (min-width: 992px) {
@@ -86,7 +87,81 @@ font-weight: bold;
   box-shadow: none !important;
 }
 
+.loggedout-nav-button {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 0.5px solid black;
+  color: black;
+  border-radius: 100px;
+  justify-content: center;
+  font-size: 14px;
+  margin: 0px 5px;
+}
+
+.loggedout-nav-button:hover {
+  font-weight: bold;
+  color: black;
+}
+
+.loggedout-nav-button-icon {
+  border-radius: 100px;
+  object-fit: fill;
+  border: 3px solid white;
+  height: 32px;
+  margin-right: 5px;
+}
+
+.loggedin-nav-button {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid red;
+  color: red;
+  border-radius: 100px;
+  justify-content: center;
+  font-size: 14px;
+  margin: 0px 5px;
+}
+
+.loggedin-nav-button:hover {
+  font-weight: bold;
+}
+
+.loggedin-nav-button-user-avatar {
+  border-radius: 100px;
+  object-fit: fill;
+  border: 3px solid white;
+  height: 32px;
+  margin-right: 5px;
+}
+
+.loggedin-navbar-button {
+  background-color: #fff;
+  color: black;
+  border: 0.5px solid black;
+  border-radius: 100px;
+  font-size: 14px;
+  margin: 0px 5px;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+.loggedin-navbar-button:hover {
+  font-weight: bold;
+  color: black;
+}
+
 .form-check-input {
   background-color: #f38449 !important;
   border: 1px solid #f38449 !important;
+}
+
+.nav-app-logo {
+  height: 52px;
+  border: 1px solid #ff924b;
+  width: 51px;
+  border-radius: 100px;
+  padding: 2px;
+  margin-right: 10px;
 }
