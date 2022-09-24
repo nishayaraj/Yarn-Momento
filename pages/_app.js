@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>Yarn Momento</title>
-        <link rel="icon" href="/YM.png" />
+        <link rel="icon" href="/favicon-32x32.png" />
       </Head>
       <AuthProvider>
         {/* gives children components access to user and auth methods */}

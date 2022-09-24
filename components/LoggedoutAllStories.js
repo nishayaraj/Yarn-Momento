@@ -35,6 +35,8 @@ function LoggedoutAllStories() {
       return '';
     }) : 'no public story');
 
+  const setStoriesFocus = () => allStoriesRef?.current?.scrollIntoView();
+
   return (
     <div
       style={{
@@ -42,7 +44,7 @@ function LoggedoutAllStories() {
         flexDirection: 'column',
       }}
     >
-      <LoggedoutNavBar getSearchTerm={setSearch} />
+      <LoggedoutNavBar getSearchTerm={setSearch} inSearchFocus={setStoriesFocus} />
       <div
         style={{
           height: '100vh',
@@ -132,9 +134,7 @@ function LoggedoutAllStories() {
                 margin: '20px 0px',
                 width: '250px',
               }}
-              onClick={() => {
-                allStoriesRef?.current?.scrollIntoView();
-              }}
+              onClick={setStoriesFocus}
             >
               Click to read stories
               <img

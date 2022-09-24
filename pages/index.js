@@ -78,6 +78,7 @@ function Home() {
         }}
         src={user.photoURL}
         alt={`Hello ${user.displayName}`}
+        referrerPolicy="no-referrer"
       />
       <div
         style={{
