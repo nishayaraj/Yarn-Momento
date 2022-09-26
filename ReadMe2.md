@@ -52,10 +52,11 @@ Please refer the [data flow document] (https://whimsical.com/yarn-momento-wirefr
 
 ## App screenshots
 
-1. [Authenticated My Stories Page](./YarnMomentoIn%20Action/my%20stories%20page.png)
-2. [Unauthenticated Loading page](./YarnMomentoIn%20Action/unauthenticated%20loading%20page.png)
-3. [My Journals page](./YarnMomentoIn%20Action/my%20journal%20page.png)
-4. [All stories page](./YarnMomentoIn%20Action/Page%20of%20all%20stories%20.png)
+1. [Authenticated My Stories Page](./YarnMomentoIn%20Action/Authenticated%20welcome%20page.png)
+2. [Unauthenticated Loading page: View1](./YarnMomentoIn%20Action/Unauthenticated%20Page%20View1.png)
+3. [Unauthenticated Loading page: View2](./YarnMomentoIn%20Action/Scroll%20down%20unauth%20page.png)
+4. [My Journals page](./YarnMomentoIn%20Action/My%20Journals%20YM.png)
+5. [All stories page](./YarnMomentoIn%20Action/All%20Stories%20YM.png)
 
 ## App screen recording
 
