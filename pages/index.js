@@ -58,7 +58,7 @@ function Home() {
   return (
     <div
       style={{
-        backgroundImage: 'url("/duskyJournal.jpg")',
+        backgroundImage: 'url("/pexels-eva-bronzini.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         height: '100vh',
@@ -94,7 +94,7 @@ function Home() {
           marginTop: '12px',
         }}
       >
-        You have {totalStories} {totalStories <= 1 ? 'story' : 'stories' } & {totalJournals} {totalJournals <= 1 ? 'journal' : 'journals' }
+        You have {totalStories} {totalStories === 1 ? 'story' : 'stories' } & {totalJournals} {totalJournals <= 1 ? 'journal' : 'journals' }
       </div>
       <div
         style={{
