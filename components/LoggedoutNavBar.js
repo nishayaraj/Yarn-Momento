@@ -57,7 +57,7 @@ export default function LoggedOutNavBar({ getSearchTerm, inSearchFocus }) {
               />
               <button
                 type="submit"
-                variant="outline-success"
+                // variant="outline-success"
                 style={{
                   color: 'black',
                   border: 'none',
