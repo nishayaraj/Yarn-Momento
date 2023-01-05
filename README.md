@@ -61,7 +61,7 @@ Please refer the [data flow document] (https://whimsical.com/yarn-momento-wirefr
 
 ## App screen recording
 
-[Yarn Momento in action]([(https://www.loom.com/share/13fa0f1b380246449a1878c4c202f1c4)])
+[Yarn Momento in action](https://www.loom.com/share/13fa0f1b380246449a1878c4c202f1c4)
 
 ## App planning doc 
 
